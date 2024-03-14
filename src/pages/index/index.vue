@@ -87,7 +87,7 @@ const onRefresherrefresh = async () => {
         <!-- 分类面板 -->
         <CategoryPanel :list="categoryList" />
         <!-- 热门推荐 -->
-        <!-- <HotPanel :list="hotList" /> -->
+        <HotPanel :list="hotList" />
         <!-- 猜你喜欢 -->
         <!-- <XtxGuess ref="guessRef" /> -->
       </template>
