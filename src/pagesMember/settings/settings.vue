@@ -8,7 +8,7 @@ const onLogout = () => {
   uni.showModal({
     content: '是否退出登录？',
     confirmColor: '#27BA9B',
-    success: (res) => {
+    success: res => {
       if (res.confirm) {
         // 清理用户信息
         memberStore.clearProfile()
@@ -51,7 +51,6 @@ const onLogout = () => {
 page {
   background-color: #f4f4f4;
 }
-
 .viewport {
   padding: 20rpx;
 }
@@ -59,23 +58,23 @@ page {
 /* 列表 */
 .list {
   padding: 0 20rpx;
-  background-color: #fff;
   margin-bottom: 20rpx;
+  background-color: #ffffff;
   border-radius: 10rpx;
   .item {
-    line-height: 90rpx;
+    position: relative;
     padding-left: 10rpx;
     font-size: 30rpx;
-    color: #333;
-    border-top: 1rpx solid #ddd;
-    position: relative;
+    line-height: 90rpx;
+    color: #333333;
     text-align: left;
+    background-color: #ffffff;
+    border-top: 1rpx solid #dddddd;
     border-radius: 0;
-    background-color: #fff;
     &::after {
+      left: auto;
       width: auto;
       height: auto;
-      left: auto;
       border: none;
     }
     &:first-child {
@@ -86,26 +85,26 @@ page {
     }
   }
   .arrow::after {
-    content: '\e6c2';
     position: absolute;
     top: 50%;
-    color: #ccc;
-    font-family: 'erabbit' !important;
+    font-family: erabbit !important;
     font-size: 32rpx;
+    color: #cccccc;
+    content: '\e6c2';
     transform: translateY(-50%);
   }
 }
 
 /* 操作按钮 */
 .action {
-  text-align: center;
-  line-height: 90rpx;
   margin-top: 40rpx;
   font-size: 32rpx;
-  color: #333;
+  line-height: 90rpx;
+  color: #333333;
+  text-align: center;
   .button {
-    background-color: #fff;
     margin-bottom: 20rpx;
+    background-color: #ffffff;
     border-radius: 10rpx;
   }
 }

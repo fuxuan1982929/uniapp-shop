@@ -17,7 +17,7 @@ const query = defineProps<{
   type: string
 }>()
 // console.log(query)
-const currUrlMap = urlMap.find((v) => v.type === query.type)
+const currUrlMap = urlMap.find(v => v.type === query.type)
 // 动态设置标题
 uni.setNavigationBarTitle({ title: currUrlMap!.title })
 
@@ -128,20 +128,20 @@ page {
   background-color: #f4f4f4;
 }
 .viewport {
+  position: relative;
   display: flex;
   flex-direction: column;
   height: 100%;
   padding: 180rpx 0 0;
-  position: relative;
 }
 .cover {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 750rpx;
   height: 225rpx;
-  border-radius: 0 0 40rpx 40rpx;
   overflow: hidden;
-  position: absolute;
-  left: 0;
-  top: 0;
+  border-radius: 0 0 40rpx 40rpx;
   .image {
     width: 750rpx;
   }
@@ -150,32 +150,32 @@ page {
   flex: 1;
 }
 .tabs {
+  position: relative;
+  z-index: 9;
   display: flex;
   justify-content: space-evenly;
   height: 100rpx;
-  line-height: 90rpx;
   margin: 0 20rpx;
   font-size: 28rpx;
+  line-height: 90rpx;
+  color: #333333;
+  background-color: #ffffff;
   border-radius: 10rpx;
-  box-shadow: 0 4rpx 5rpx rgba(200, 200, 200, 0.3);
-  color: #333;
-  background-color: #fff;
-  position: relative;
-  z-index: 9;
+  box-shadow: 0 4rpx 5rpx rgb(200 200 200 / 30%);
   .text {
-    margin: 0 20rpx;
     position: relative;
+    margin: 0 20rpx;
   }
   .active {
     &::after {
-      content: '';
+      position: absolute;
+      bottom: 24rpx;
+      left: 50%;
       width: 40rpx;
       height: 4rpx;
-      transform: translate(-50%);
+      content: '';
       background-color: #27ba9b;
-      position: absolute;
-      left: 50%;
-      bottom: 24rpx;
+      transform: translate(-50%);
     }
   }
 }
@@ -188,8 +188,8 @@ page {
     width: 345rpx;
     padding: 20rpx;
     margin-top: 20rpx;
+    background-color: #ffffff;
     border-radius: 10rpx;
-    background-color: #fff;
   }
   .thumb {
     width: 305rpx;
@@ -200,9 +200,9 @@ page {
     font-size: 26rpx;
   }
   .price {
+    font-size: 30rpx;
     line-height: 1;
     color: #cf4444;
-    font-size: 30rpx;
   }
   .symbol {
     font-size: 70%;
@@ -211,11 +211,10 @@ page {
     font-size: 70%;
   }
 }
-
 .loading-text {
-  text-align: center;
-  font-size: 28rpx;
-  color: #666;
   padding: 20rpx 0 50rpx;
+  font-size: 28rpx;
+  color: #666666;
+  text-align: center;
 }
 </style>

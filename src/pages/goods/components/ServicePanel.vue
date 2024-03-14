@@ -38,59 +38,52 @@ const emit = defineEmits<{
 
 <style lang="scss">
 .service-panel {
-  padding: 0 30rpx;
-  border-radius: 10rpx 10rpx 0 0;
   position: relative;
-  background-color: #fff;
+  padding: 0 30rpx;
+  background-color: #ffffff;
+  border-radius: 10rpx 10rpx 0 0;
 }
-
 .title {
-  line-height: 1;
   padding: 40rpx 0;
-  text-align: center;
   font-size: 32rpx;
   font-weight: normal;
-  border-bottom: 1rpx solid #ddd;
-  color: #444;
+  line-height: 1;
+  color: #444444;
+  text-align: center;
+  border-bottom: 1rpx solid #dddddd;
 }
-
 .close {
   position: absolute;
-  right: 24rpx;
   top: 24rpx;
+  right: 24rpx;
 }
-
 .content {
-  padding: 20rpx 20rpx 100rpx 20rpx;
-
+  padding: 20rpx 20rpx 100rpx;
   .item {
     margin-top: 20rpx;
   }
-
   .dt {
+    position: relative;
     margin-bottom: 10rpx;
     font-size: 28rpx;
-    color: #333;
     font-weight: 500;
-    position: relative;
-
+    color: #333333;
     &::before {
-      content: '';
-      width: 10rpx;
-      height: 10rpx;
-      border-radius: 50%;
-      background-color: #eaeaea;
-      transform: translateY(-50%);
       position: absolute;
       top: 50%;
       left: -20rpx;
+      width: 10rpx;
+      height: 10rpx;
+      content: '';
+      background-color: #eaeaea;
+      border-radius: 50%;
+      transform: translateY(-50%);
     }
   }
-
   .dd {
-    line-height: 1.6;
     font-size: 26rpx;
-    color: #999;
+    line-height: 1.6;
+    color: #999999;
   }
 }
 </style>

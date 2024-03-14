@@ -32,7 +32,7 @@ const onAvatarChange = () => {
   // 微信小程序从基础库 2.21.0 开始， wx.chooseImage 停止维护，请使用 uni.chooseMedia 代替
   uni.chooseImage({
     count: 1,
-    success: (res) => {
+    success: res => {
       // 文件路径
       const tempFilePaths = res.tempFilePaths
       // 上传
@@ -48,7 +48,7 @@ const onAvatarChange = () => {
     count: 1,
     // 文件类型
     mediaType: ['image'],
-    success: (res) => {
+    success: res => {
       // 本地路径
       const { tempFilePath } = res.tempFiles[0]
       // 上传
@@ -65,7 +65,7 @@ const uploadFile = (file: string) => {
     url: '/member/profile/avatar',
     name: 'file',
     filePath: file,
-    success: (res) => {
+    success: res => {
       if (res.statusCode === 200) {
         const avatar = JSON.parse(res.data).result.avatar
         // 个人信息页数据更新
@@ -81,18 +81,18 @@ const uploadFile = (file: string) => {
 }
 
 // 修改性别
-const onGenderChange: UniHelper.RadioGroupOnChange = (ev) => {
+const onGenderChange: UniHelper.RadioGroupOnChange = ev => {
   profile.value.gender = ev.detail.value as Gender
 }
 
 // 修改生日
-const onBirthdayChange: UniHelper.DatePickerOnChange = (ev) => {
+const onBirthdayChange: UniHelper.DatePickerOnChange = ev => {
   profile.value.birthday = ev.detail.value
 }
 
 // 修改城市
 let fullLocationCode: [string, string, string] = ['', '', '']
-const onFullLocationChange: UniHelper.RegionPickerOnChange = (ev) => {
+const onFullLocationChange: UniHelper.RegionPickerOnChange = ev => {
   // 修改前端界面
   profile.value.fullLocation = ev.detail.value.join(' ')
   // 提交后端更新
@@ -202,112 +202,99 @@ const onSubmit = async () => {
 page {
   background-color: #f4f4f4;
 }
-
 .viewport {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-image: url(https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/order_bg.png);
-  background-size: auto 420rpx;
+  background-image: url('https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/order_bg.png');
   background-repeat: no-repeat;
+  background-size: auto 420rpx;
 }
 
 // 导航栏
 .navbar {
   position: relative;
-
   .title {
-    height: 40px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    height: 40px;
     font-size: 16px;
     font-weight: 500;
-    color: #fff;
+    color: #ffffff;
   }
-
   .back {
     position: absolute;
-    height: 40px;
-    width: 40px;
     left: 0;
-    font-size: 20px;
-    color: #fff;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    color: #ffffff;
   }
 }
 
 // 头像
 .avatar {
-  text-align: center;
-  width: 100%;
-  height: 260rpx;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-
+  justify-content: center;
+  width: 100%;
+  height: 260rpx;
+  text-align: center;
   .image {
     width: 160rpx;
     height: 160rpx;
+    background-color: #eeeeee;
     border-radius: 50%;
-    background-color: #eee;
   }
-
   .text {
     display: block;
     padding-top: 20rpx;
-    line-height: 1;
     font-size: 26rpx;
-    color: #fff;
+    line-height: 1;
+    color: #ffffff;
   }
 }
 
 // 表单
 .form {
   background-color: #f4f4f4;
-
   &-content {
-    margin: 20rpx 20rpx 0;
     padding: 0 20rpx;
+    margin: 20rpx 20rpx 0;
+    background-color: #ffffff;
     border-radius: 10rpx;
-    background-color: #fff;
   }
-
   &-item {
     display: flex;
     height: 96rpx;
-    line-height: 46rpx;
     padding: 25rpx 10rpx;
-    background-color: #fff;
     font-size: 28rpx;
-    border-bottom: 1rpx solid #ddd;
-
+    line-height: 46rpx;
+    background-color: #ffffff;
+    border-bottom: 1rpx solid #dddddd;
     &:last-child {
       border: none;
     }
-
     .label {
       width: 180rpx;
-      color: #333;
+      color: #333333;
     }
-
     .account {
-      color: #666;
+      color: #666666;
     }
-
     .input {
-      flex: 1;
       display: block;
+      flex: 1;
       height: 46rpx;
     }
-
     .radio {
       margin-right: 20rpx;
     }
-
     .picker {
       flex: 1;
     }
@@ -315,16 +302,15 @@ page {
       color: #808080;
     }
   }
-
   &-button {
     height: 80rpx;
-    text-align: center;
-    line-height: 80rpx;
     margin: 30rpx 20rpx;
-    color: #fff;
-    border-radius: 80rpx;
     font-size: 30rpx;
+    line-height: 80rpx;
+    color: #ffffff;
+    text-align: center;
     background-color: #27ba9b;
+    border-radius: 80rpx;
   }
 }
 </style>

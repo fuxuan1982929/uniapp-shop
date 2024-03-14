@@ -131,6 +131,7 @@
   color: transparent !important;
 }
 .sk-text-14-2857-107 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 14.2857%,
     #eeeeee 0%,
@@ -138,16 +139,16 @@
     transparent 0%
   ) !important;
   background-size: 100% 44.8rpx;
-  position: relative !important;
 }
 .sk-text {
-  background-origin: content-box !important;
-  background-clip: content-box !important;
-  background-color: transparent !important;
   color: transparent !important;
+  background-color: transparent !important;
   background-repeat: repeat-y !important;
+  background-clip: content-box !important;
+  background-origin: content-box !important;
 }
 .sk-text-0-0000-826 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 0%,
     #eeeeee 0%,
@@ -155,9 +156,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 36rpx;
-  position: relative !important;
 }
 .sk-text-14-2857-512 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 14.2857%,
     #eeeeee 0%,
@@ -165,9 +166,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 36.4rpx;
-  position: relative !important;
 }
 .sk-text-14-2857-990 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 14.2857%,
     #eeeeee 0%,
@@ -175,9 +176,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 33.6rpx;
-  position: relative !important;
 }
 .sk-text-14-2857-630 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 14.2857%,
     #eeeeee 0%,
@@ -185,9 +186,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 36.4rpx;
-  position: relative !important;
 }
 .sk-text-14-2857-606 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 14.2857%,
     #eeeeee 0%,
@@ -195,9 +196,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 33.6rpx;
-  position: relative !important;
 }
 .sk-text-14-2857-474 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 14.2857%,
     #eeeeee 0%,
@@ -205,9 +206,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 36.4rpx;
-  position: relative !important;
 }
 .sk-text-22-2222-237 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 22.2222%,
     #eeeeee 0%,
@@ -215,12 +216,12 @@
     transparent 0%
   ) !important;
   background-size: 100% 43.2rpx;
-  position: relative !important;
 }
 .sk-opacity {
   opacity: 0 !important;
 }
 .sk-text-14-2857-102 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 14.2857%,
     #eeeeee 0%,
@@ -228,9 +229,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 33.6rpx;
-  position: relative !important;
 }
 .sk-text-14-2857-969 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 14.2857%,
     #eeeeee 0%,
@@ -238,9 +239,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 36.4rpx;
-  position: relative !important;
 }
 .sk-text-22-2222-510 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 22.2222%,
     #eeeeee 0%,
@@ -248,9 +249,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 43.2rpx;
-  position: relative !important;
 }
 .sk-text-14-2857-431 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 14.2857%,
     #eeeeee 0%,
@@ -258,9 +259,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 33.6rpx;
-  position: relative !important;
 }
 .sk-text-14-2857-130 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 14.2857%,
     #eeeeee 0%,
@@ -268,9 +269,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 36.4rpx;
-  position: relative !important;
 }
 .sk-text-22-2222-110 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 22.2222%,
     #eeeeee 0%,
@@ -278,9 +279,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 43.2rpx;
-  position: relative !important;
 }
 .sk-text-14-2857-273 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 14.2857%,
     #eeeeee 0%,
@@ -288,9 +289,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 33.6rpx;
-  position: relative !important;
 }
 .sk-text-0-0000-302 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 0%,
     #eeeeee 0%,
@@ -298,9 +299,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 26rpx;
-  position: relative !important;
 }
 .sk-text-0-0000-998 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 0%,
     #eeeeee 0%,
@@ -308,9 +309,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 26rpx;
-  position: relative !important;
 }
 .sk-text-0-0000-912 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 0%,
     #eeeeee 0%,
@@ -318,9 +319,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 26rpx;
-  position: relative !important;
 }
 .sk-text-0-0000-208 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 0%,
     #eeeeee 0%,
@@ -328,9 +329,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 26rpx;
-  position: relative !important;
 }
 .sk-text-0-0000-538 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 0%,
     #eeeeee 0%,
@@ -338,9 +339,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 26rpx;
-  position: relative !important;
 }
 .sk-text-0-0000-858 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 0%,
     #eeeeee 0%,
@@ -348,9 +349,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 36rpx;
-  position: relative !important;
 }
 .sk-text-0-0000-66 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 0%,
     #eeeeee 0%,
@@ -358,9 +359,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 30rpx;
-  position: relative !important;
 }
 .sk-text-0-0000-522 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 0%,
     #eeeeee 0%,
@@ -368,9 +369,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 20rpx;
-  position: relative !important;
 }
 .sk-text-0-0000-353 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 0%,
     #eeeeee 0%,
@@ -378,9 +379,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 26rpx;
-  position: relative !important;
 }
 .sk-text-0-0000-375 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 0%,
     #eeeeee 0%,
@@ -388,9 +389,9 @@
     transparent 0%
   ) !important;
   background-size: 100% 32rpx;
-  position: relative !important;
 }
 .sk-text-31-9444-411 {
+  position: relative !important;
   background-image: linear-gradient(
     transparent 31.9444%,
     #eeeeee 0%,
@@ -398,16 +399,15 @@
     transparent 0%
   ) !important;
   background-size: 100% 72rpx;
-  position: relative !important;
 }
 .sk-image {
   background: #efefef !important;
 }
 .sk-pseudo::before,
 .sk-pseudo::after {
+  color: transparent !important;
   background: #efefef !important;
   background-image: none !important;
-  color: transparent !important;
   border-color: transparent !important;
 }
 .sk-pseudo-rect::before,
@@ -420,8 +420,8 @@
 }
 .sk-container {
   position: absolute;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;

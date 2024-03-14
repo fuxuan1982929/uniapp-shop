@@ -19,11 +19,27 @@ export const getHomeBannerAPI = (distributionSite = 1) => {
 /**
  * 首页-前台分类-小程序
  */
+// export const getHomeCategoryAPI = () => {
+//   return http<CategoryItem[]>({
+//     method: 'GET',
+//     url: '/home/category/mutli',
+//   })
+// }
+
 export const getHomeCategoryAPI = () => {
-  return http<CategoryItem[]>({
-    method: 'GET',
-    url: '/home/category/mutli',
-  })
+  const data: CategoryItem[] = [
+    {
+      id: 'aa',
+      icon: 'http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-05-06/201516e3-25d0-48f5-bcee-7f0cafb14176.png?quality=95&imageView',
+      name: '外勤接送',
+    },
+    {
+      id: 'bb',
+      icon: 'http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-05-06/201516e3-25d0-48f5-bcee-7f0cafb14176.png?quality=95&imageView',
+      name: '微任务',
+    },
+  ]
+  return data
 }
 
 /**

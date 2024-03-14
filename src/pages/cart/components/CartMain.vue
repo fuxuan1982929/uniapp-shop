@@ -46,7 +46,7 @@ const onDeleteCart = (skuId: string) => {
   uni.showModal({
     content: '是否删除',
     confirmColor: '#27BA9B',
-    success: async (res) => {
+    success: async res => {
       if (res.confirm) {
         // 后端删除单品
         await deleteMemberCartAPI({ ids: [skuId] })
@@ -72,7 +72,7 @@ const onChangeSelected = (item: CartItem) => {
 
 // 计算全选状态
 const isSelectedAll = computed(() => {
-  return cartList.value.length && cartList.value.every((v) => v.selected)
+  return cartList.value.length && cartList.value.every(v => v.selected)
 })
 
 // 修改选中状态-全选修改
@@ -80,7 +80,7 @@ const onChangeSelectedAll = () => {
   // 全选状态取反
   const _isSelectedAll = !isSelectedAll.value
   // 前端数据更新
-  cartList.value.forEach((item) => {
+  cartList.value.forEach(item => {
     item.selected = _isSelectedAll
   })
   // 后端数据更新
@@ -89,7 +89,7 @@ const onChangeSelectedAll = () => {
 
 // 计算选中单品列表
 const selectedCartList = computed(() => {
-  return cartList.value.filter((v) => v.selected)
+  return cartList.value.filter(v => v.selected)
 })
 
 // 计算选中总件数
@@ -220,9 +220,9 @@ const { guessRef, onScrolltolower } = useGuessList()
 <style lang="scss">
 // 根元素
 :host {
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 100vh;
   overflow: hidden;
   background-color: #f7f7f8;
 }
@@ -241,150 +241,130 @@ const { guessRef, onScrolltolower } = useGuessList()
   .tips {
     display: flex;
     align-items: center;
-    line-height: 1;
     margin: 30rpx 10rpx;
     font-size: 26rpx;
-    color: #666;
-
+    line-height: 1;
+    color: #666666;
     .label {
-      color: #fff;
       padding: 7rpx 15rpx 5rpx;
-      border-radius: 4rpx;
-      font-size: 24rpx;
-      background-color: #27ba9b;
       margin-right: 10rpx;
+      font-size: 24rpx;
+      color: #ffffff;
+      background-color: #27ba9b;
+      border-radius: 4rpx;
     }
   }
 
   // 购物车商品
   .goods {
+    position: relative;
     display: flex;
     padding: 20rpx 20rpx 20rpx 80rpx;
+    background-color: #ffffff;
     border-radius: 10rpx;
-    background-color: #fff;
-    position: relative;
-
     .navigator {
       display: flex;
     }
-
     .checkbox {
       position: absolute;
       top: 0;
       left: 0;
-
       display: flex;
       align-items: center;
       justify-content: center;
       width: 80rpx;
       height: 100%;
-
       &::before {
-        content: '\e6cd';
-        font-family: 'erabbit' !important;
+        font-family: erabbit !important;
         font-size: 40rpx;
-        color: #444;
+        color: #444444;
+        content: '\e6cd';
       }
-
       &.checked::before {
-        content: '\e6cc';
         color: #27ba9b;
+        content: '\e6cc';
       }
     }
-
     .picture {
       width: 170rpx;
       height: 170rpx;
     }
-
     .meta {
-      flex: 1;
       display: flex;
+      flex: 1;
       flex-direction: column;
       justify-content: space-between;
       margin-left: 20rpx;
     }
-
     .name {
       height: 72rpx;
       font-size: 26rpx;
-      color: #444;
+      color: #444444;
     }
-
     .attrsText {
-      line-height: 1.8;
+      align-self: flex-start;
       padding: 0 15rpx;
       font-size: 24rpx;
-      align-self: flex-start;
-      border-radius: 4rpx;
-      color: #888;
+      line-height: 1.8;
+      color: #888888;
       background-color: #f7f7f8;
+      border-radius: 4rpx;
     }
-
     .price {
-      line-height: 1;
-      font-size: 26rpx;
-      color: #444;
       margin-bottom: 2rpx;
+      font-size: 26rpx;
+      line-height: 1;
       color: #cf4444;
-
       &::before {
-        content: '￥';
         font-size: 80%;
+        content: '￥';
       }
     }
 
     // 商品数量
     .count {
       position: absolute;
-      bottom: 20rpx;
       right: 5rpx;
-
+      bottom: 20rpx;
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       width: 220rpx;
       height: 48rpx;
-
       .text {
         height: 100%;
         padding: 0 20rpx;
         font-size: 32rpx;
-        color: #444;
+        color: #444444;
       }
-
       .input {
         height: 100%;
-        text-align: center;
-        border-radius: 4rpx;
         font-size: 24rpx;
-        color: #444;
+        color: #444444;
+        text-align: center;
         background-color: #f6f6f6;
+        border-radius: 4rpx;
       }
     }
   }
-
   .cart-swipe {
     display: block;
     margin: 20rpx 0;
   }
-
   .cart-swipe-right {
     display: flex;
     height: 100%;
-
     .button {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       width: 50px;
       padding: 6px;
-      line-height: 1.5;
-      color: #fff;
       font-size: 26rpx;
+      line-height: 1.5;
+      color: #ffffff;
       border-radius: 0;
     }
-
     .delete-button {
       background-color: #cf4444;
     }
@@ -395,113 +375,102 @@ const { guessRef, onScrolltolower } = useGuessList()
 .cart-blank,
 .login-blank {
   display: flex;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   height: 60vh;
   .image {
     width: 400rpx;
     height: 281rpx;
   }
   .text {
-    color: #444;
-    font-size: 26rpx;
     margin: 20rpx 0;
+    font-size: 26rpx;
+    color: #444444;
   }
   .button {
     width: 240rpx !important;
     height: 60rpx;
-    line-height: 60rpx;
     margin-top: 20rpx;
     font-size: 26rpx;
-    border-radius: 60rpx;
-    color: #fff;
+    line-height: 60rpx;
+    color: #ffffff;
     background-color: #27ba9b;
+    border-radius: 60rpx;
   }
 }
 
 // 吸底工具栏
 .toolbar {
   position: fixed;
-  left: 0;
   right: 0;
   bottom: calc(var(--window-bottom));
+  left: 0;
   z-index: 1;
-
-  height: 100rpx;
-  padding: 0 20rpx;
+  box-sizing: content-box;
   display: flex;
   align-items: center;
+  height: 100rpx;
+  padding: 0 20rpx;
+  background-color: #ffffff;
   border-top: 1rpx solid #ededed;
   border-bottom: 1rpx solid #ededed;
-  background-color: #fff;
-  box-sizing: content-box;
-
   .all {
-    margin-left: 25rpx;
-    font-size: 14px;
-    color: #444;
     display: flex;
     align-items: center;
+    margin-left: 25rpx;
+    font-size: 14px;
+    color: #444444;
   }
-
   .all::before {
-    font-family: 'erabbit' !important;
-    content: '\e6cd';
-    font-size: 40rpx;
     margin-right: 8rpx;
+    font-family: erabbit !important;
+    font-size: 40rpx;
+    content: '\e6cd';
   }
-
   .checked::before {
-    content: '\e6cc';
     color: #27ba9b;
+    content: '\e6cc';
   }
-
   .text {
     margin-right: 8rpx;
     margin-left: 32rpx;
-    color: #444;
     font-size: 14px;
+    color: #444444;
   }
-
   .amount {
     font-size: 20px;
     color: #cf4444;
-
     .decimal {
       font-size: 12px;
     }
-
     &::before {
-      content: '￥';
       font-size: 12px;
+      content: '￥';
     }
   }
-
   .button-grounp {
-    margin-left: auto;
     display: flex;
     justify-content: space-between;
-    text-align: center;
-    line-height: 72rpx;
+    margin-left: auto;
     font-size: 13px;
-    color: #fff;
-
+    line-height: 72rpx;
+    color: #ffffff;
+    text-align: center;
     .button {
       width: 240rpx;
       margin: 0 10rpx;
       border-radius: 72rpx;
     }
-
     .payment-button {
       background-color: #27ba9b;
-
       &.disabled {
         opacity: 0.6;
       }
     }
   }
 }
+
 // 底部占位空盒子
 .toolbar-height {
   height: 100rpx;

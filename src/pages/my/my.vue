@@ -95,80 +95,69 @@ page {
   overflow: hidden;
   background-color: #f7f7f8;
 }
-
 .viewport {
   height: 100%;
+  background-image: url('https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/center_bg.png');
   background-repeat: no-repeat;
-  background-image: url(https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/center_bg.png);
   background-size: 100% auto;
 }
 
 /* 用户信息 */
 .profile {
-  margin-top: 30rpx;
   position: relative;
-
+  margin-top: 30rpx;
   .overview {
     display: flex;
     height: 120rpx;
     padding: 0 36rpx;
-    color: #fff;
+    color: #ffffff;
   }
-
   .avatar {
     width: 120rpx;
     height: 120rpx;
+    background-color: #eeeeee;
     border-radius: 50%;
-    background-color: #eee;
   }
-
   .gray {
     filter: grayscale(100%);
   }
-
   .meta {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
-    line-height: 30rpx;
+    justify-content: center;
     padding: 16rpx 0;
     margin-left: 20rpx;
+    line-height: 30rpx;
   }
-
   .nickname {
     max-width: 180rpx;
     margin-bottom: 16rpx;
-    font-size: 30rpx;
-
     overflow: hidden;
+    font-size: 30rpx;
     text-overflow: ellipsis;
     white-space: nowrap;
   }
-
   .extra {
     display: flex;
     font-size: 20rpx;
   }
-
   .tips {
     font-size: 22rpx;
   }
-
   .update {
     padding: 3rpx 10rpx 1rpx;
-    color: rgba(255, 255, 255, 0.8);
-    border: 1rpx solid rgba(255, 255, 255, 0.8);
     margin-right: 10rpx;
+    color: rgb(255 255 255 / 80%);
+    border: 1rpx solid rgb(255 255 255 / 80%);
     border-radius: 30rpx;
   }
-
   .settings {
     position: absolute;
-    bottom: 0;
     right: 40rpx;
+    bottom: 0;
     font-size: 30rpx;
-    color: #fff;
+    color: #ffffff;
   }
 }
 
@@ -178,33 +167,30 @@ page {
   z-index: 99;
   padding: 30rpx;
   margin: 50rpx 20rpx 0;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 10rpx;
-  box-shadow: 0 4rpx 6rpx rgba(240, 240, 240, 0.6);
-
+  box-shadow: 0 4rpx 6rpx rgb(240 240 240 / 60%);
   .title {
     height: 40rpx;
-    line-height: 40rpx;
     font-size: 28rpx;
+    line-height: 40rpx;
     color: #1e1e1e;
-
     .navigator {
+      float: right;
       font-size: 24rpx;
       color: #939393;
-      float: right;
     }
   }
-
   .section {
-    width: 100%;
     display: flex;
     justify-content: space-between;
+    width: 100%;
     padding: 40rpx 20rpx 10rpx;
     .navigator,
     .contact {
-      text-align: center;
       font-size: 24rpx;
-      color: #333;
+      color: #333333;
+      text-align: center;
       &::before {
         display: block;
         font-size: 60rpx;
@@ -217,16 +203,16 @@ page {
     .contact {
       padding: 0;
       margin: 0;
-      border: 0;
-      background-color: transparent;
       line-height: inherit;
+      background-color: transparent;
+      border: 0;
     }
   }
 }
 
 /* 猜你喜欢 */
 .guess {
-  background-color: #f7f7f8;
   margin-top: 20rpx;
+  background-color: #f7f7f8;
 }
 </style>

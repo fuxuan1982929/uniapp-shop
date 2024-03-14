@@ -43,7 +43,7 @@ onLoad(() => {
 uni.setNavigationBarTitle({ title: query.id ? '修改地址' : '新建地址' })
 
 // 收集所在地区
-const onRegionChange: UniHelper.RegionPickerOnChange = (ev) => {
+const onRegionChange: UniHelper.RegionPickerOnChange = ev => {
   // 省市区(前端展示)
   form.value.fullLocation = ev.detail.value.join(' ')
   // 省市区(后端参数)
@@ -53,7 +53,7 @@ const onRegionChange: UniHelper.RegionPickerOnChange = (ev) => {
 }
 
 // 收集是否默认收货地址
-const onSwitchChange: UniHelper.SwitchOnChange = (ev) => {
+const onSwitchChange: UniHelper.SwitchOnChange = ev => {
   form.value.isDefault = ev.detail.value ? 1 : 0
 }
 
@@ -104,7 +104,7 @@ const onSubmit = async () => {
 }
 
 // #ifdef H5 || APP-PLUS
-const onCityChange: UniHelper.UniDataPickerOnChange = (ev) => {
+const onCityChange: UniHelper.UniDataPickerOnChange = ev => {
   // 省市区
   const [province, city, county] = ev.detail.value
   // 收集后端所需的 code 数据
@@ -189,75 +189,64 @@ const onCityChange: UniHelper.UniDataPickerOnChange = (ev) => {
   flex: 0 1 auto;
   height: auto;
 }
-
 page {
   background-color: #f4f4f4;
 }
-
 .content {
-  margin: 20rpx 20rpx 0;
   padding: 0 20rpx;
+  margin: 20rpx 20rpx 0;
+  background-color: #ffffff;
   border-radius: 10rpx;
-  background-color: #fff;
-
   .form-item,
   .uni-forms-item {
+    position: relative;
     display: flex;
     align-items: center;
     min-height: 96rpx;
     padding: 25rpx 10rpx;
-    background-color: #fff;
-    font-size: 28rpx;
-    border-bottom: 1rpx solid #ddd;
-    position: relative;
     margin-bottom: 0;
+    font-size: 28rpx;
+    background-color: #ffffff;
+    border-bottom: 1rpx solid #dddddd;
 
     // 调整 uni-forms 样式
     .uni-forms-item__content {
       display: flex;
     }
-
     .uni-forms-item__error {
       margin-left: 200rpx;
     }
-
     &:last-child {
       border: none;
     }
-
     .label {
       width: 200rpx;
-      color: #333;
+      color: #333333;
     }
-
     .input {
-      flex: 1;
       display: block;
+      flex: 1;
       height: 46rpx;
     }
-
     .switch {
       position: absolute;
       right: -20rpx;
       transform: scale(0.8);
     }
-
     .picker {
       flex: 1;
     }
-
     .placeholder {
       color: #808080;
     }
   }
 }
-
 .button {
   height: 80rpx;
   margin: 30rpx 20rpx;
-  color: #fff;
-  border-radius: 80rpx;
   font-size: 30rpx;
+  color: #ffffff;
   background-color: #27ba9b;
+  border-radius: 80rpx;
 }
 </style>

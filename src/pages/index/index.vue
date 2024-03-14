@@ -20,7 +20,8 @@ const getHomeBannerData = async () => {
 const categoryList = ref<CategoryItem[]>([])
 const getHomeCategoryData = async () => {
   const res = await getHomeCategoryAPI()
-  categoryList.value = res.result
+  //categoryList.value = res.result
+  categoryList.value = res
 }
 
 // 获取热门推荐数据
@@ -86,9 +87,9 @@ const onRefresherrefresh = async () => {
         <!-- 分类面板 -->
         <CategoryPanel :list="categoryList" />
         <!-- 热门推荐 -->
-        <HotPanel :list="hotList" />
+        <!-- <HotPanel :list="hotList" /> -->
         <!-- 猜你喜欢 -->
-        <XtxGuess ref="guessRef" />
+        <!-- <XtxGuess ref="guessRef" /> -->
       </template>
     </scroll-view>
   </view>
@@ -96,17 +97,15 @@ const onRefresherrefresh = async () => {
 
 <style lang="scss">
 page {
-  background-color: #f7f7f7;
   height: 100%;
   overflow: hidden;
+  background-color: #f7f7f7;
 }
-
 .viewport {
-  height: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
-
 .scroll-view {
   flex: 1;
   overflow: hidden;

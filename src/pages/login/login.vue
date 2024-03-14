@@ -14,7 +14,7 @@ onLoad(async () => {
 })
 
 // 获取用户手机号码
-const onGetphonenumber: UniHelper.ButtonOnGetphonenumber = async (ev) => {
+const onGetphonenumber: UniHelper.ButtonOnGetphonenumber = async ev => {
   const { encryptedData, iv } = ev.detail
   const res = await postLoginWxMinAPI({ code, encryptedData, iv })
   loginSuccess(res.result)
@@ -97,14 +97,12 @@ const onSubmit = async () => {
 page {
   height: 100%;
 }
-
 .viewport {
   display: flex;
   flex-direction: column;
   height: 100%;
   padding: 20rpx 40rpx;
 }
-
 .logo {
   flex: 1;
   text-align: center;
@@ -114,23 +112,20 @@ page {
     margin-top: 15vh;
   }
 }
-
 .login {
   display: flex;
   flex-direction: column;
   height: 60vh;
   padding: 40rpx 20rpx 20rpx;
-
   .input {
     width: 100%;
     height: 80rpx;
-    font-size: 28rpx;
-    border-radius: 72rpx;
-    border: 1px solid #ddd;
     padding-left: 30rpx;
     margin-bottom: 20rpx;
+    font-size: 28rpx;
+    border: 1px solid #dddddd;
+    border-radius: 72rpx;
   }
-
   .button {
     display: flex;
     align-items: center;
@@ -138,45 +133,41 @@ page {
     width: 100%;
     height: 80rpx;
     font-size: 28rpx;
+    color: #ffffff;
     border-radius: 72rpx;
-    color: #fff;
     .icon {
-      font-size: 40rpx;
       margin-right: 6rpx;
+      font-size: 40rpx;
     }
   }
-
   .phone {
     background-color: #28bb9c;
   }
-
   .wechat {
     background-color: #06c05f;
   }
-
   .extra {
     flex: 1;
     padding: 70rpx 70rpx 0;
     .caption {
-      width: 440rpx;
-      line-height: 1;
-      border-top: 1rpx solid #ddd;
-      font-size: 26rpx;
-      color: #999;
       position: relative;
+      width: 440rpx;
+      font-size: 26rpx;
+      line-height: 1;
+      color: #999999;
+      border-top: 1rpx solid #dddddd;
       text {
-        transform: translate(-40%);
-        background-color: #fff;
         position: absolute;
         top: -12rpx;
         left: 50%;
+        background-color: #ffffff;
+        transform: translate(-40%);
       }
     }
-
     .options {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       margin-top: 70rpx;
       button {
         padding: 0;
@@ -186,14 +177,12 @@ page {
         }
       }
     }
-
     .icon {
-      font-size: 24rpx;
-      color: #444;
       display: flex;
       flex-direction: column;
       align-items: center;
-
+      font-size: 24rpx;
+      color: #444444;
       &::before {
         display: flex;
         align-items: center;
@@ -202,24 +191,23 @@ page {
         height: 80rpx;
         margin-bottom: 6rpx;
         font-size: 40rpx;
-        border: 1rpx solid #444;
+        border: 1rpx solid #444444;
         border-radius: 50%;
       }
     }
     .icon-weixin::before {
-      border-color: #06c05f;
       color: #06c05f;
+      border-color: #06c05f;
     }
   }
 }
-
 .tips {
   position: absolute;
+  right: 20rpx;
   bottom: 80rpx;
   left: 20rpx;
-  right: 20rpx;
   font-size: 22rpx;
-  color: #999;
+  color: #999999;
   text-align: center;
 }
 </style>

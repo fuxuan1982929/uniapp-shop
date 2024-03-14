@@ -77,7 +77,7 @@ const onOrderPay = async (id: string) => {
   // 成功提示
   uni.showToast({ title: '支付成功' })
   // 更新订单状态
-  const order = orderList.value.find((v) => v.id === id)
+  const order = orderList.value.find(v => v.id === id)
   order!.orderState = OrderState.DaiFaHuo
 }
 
@@ -86,12 +86,12 @@ const onOrderConfirm = (id: string) => {
   uni.showModal({
     content: '为保障您的权益，请收到货并确认无误后，再确认收货',
     confirmColor: '#27BA9B',
-    success: async (res) => {
+    success: async res => {
       if (res.confirm) {
         await putMemberOrderReceiptByIdAPI(id)
         uni.showToast({ icon: 'success', title: '确认收货成功' })
         // 确认成功，更新为待评价
-        const order = orderList.value.find((v) => v.id === id)
+        const order = orderList.value.find(v => v.id === id)
         order!.orderState = OrderState.DaiPingJia
       }
     },
@@ -103,11 +103,11 @@ const onOrderDelete = (id: string) => {
   uni.showModal({
     content: '你确定要删除该订单？',
     confirmColor: '#27BA9B',
-    success: async (res) => {
+    success: async res => {
       if (res.confirm) {
         await deleteMemberOrderAPI({ ids: [id] })
         // 删除成功，界面中删除订单
-        const index = orderList.value.findIndex((v) => v.id === id)
+        const index = orderList.value.findIndex(v => v.id === id)
         orderList.value.splice(index, 1)
       }
     },
@@ -217,164 +217,143 @@ const onRefresherrefresh = async () => {
     min-height: 100rpx;
     padding: 20rpx;
     margin: 20rpx 20rpx 0;
+    background-color: #ffffff;
     border-radius: 10rpx;
-    background-color: #fff;
-
     &:last-child {
       padding-bottom: 40rpx;
     }
   }
-
   .status {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 28rpx;
-    color: #999;
     margin-bottom: 15rpx;
-
+    font-size: 28rpx;
+    color: #999999;
     .date {
-      color: #666;
       flex: 1;
+      color: #666666;
     }
-
     .primary {
       color: #ff9240;
     }
-
     .icon-delete {
-      line-height: 1;
-      margin-left: 10rpx;
       padding-left: 10rpx;
+      margin-left: 10rpx;
+      line-height: 1;
       border-left: 1rpx solid #e3e3e3;
     }
   }
-
   .goods {
     display: flex;
     margin-bottom: 20rpx;
-
     .cover {
+      position: relative;
       width: 170rpx;
       height: 170rpx;
       margin-right: 20rpx;
-      border-radius: 10rpx;
       overflow: hidden;
-      position: relative;
+      border-radius: 10rpx;
       .image {
         width: 170rpx;
         height: 170rpx;
       }
     }
-
     .quantity {
       position: absolute;
-      bottom: 0;
       right: 0;
-      line-height: 1;
+      bottom: 0;
       padding: 6rpx 4rpx 6rpx 8rpx;
       font-size: 24rpx;
-      color: #fff;
-      border-radius: 10rpx 0 0 0;
-      background-color: rgba(0, 0, 0, 0.6);
+      line-height: 1;
+      color: #ffffff;
+      background-color: rgb(0 0 0 / 60%);
+      border-radius: 10rpx 0 0;
     }
-
     .meta {
-      flex: 1;
       display: flex;
+      flex: 1;
       flex-direction: column;
       justify-content: center;
     }
-
     .name {
       height: 80rpx;
       font-size: 26rpx;
-      color: #444;
+      color: #444444;
     }
-
     .type {
-      line-height: 1.8;
+      align-self: flex-start;
       padding: 0 15rpx;
       margin-top: 10rpx;
       font-size: 24rpx;
-      align-self: flex-start;
-      border-radius: 4rpx;
-      color: #888;
+      line-height: 1.8;
+      color: #888888;
       background-color: #f7f7f8;
+      border-radius: 4rpx;
     }
-
     .more {
-      flex: 1;
       display: flex;
+      flex: 1;
       align-items: center;
       justify-content: center;
       font-size: 22rpx;
-      color: #333;
+      color: #333333;
     }
   }
-
   .payment {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
-    line-height: 1;
+    justify-content: flex-end;
     padding: 20rpx 0;
-    text-align: right;
-    color: #999;
     font-size: 28rpx;
-    border-bottom: 1rpx solid #eee;
-
+    line-height: 1;
+    color: #999999;
+    text-align: right;
+    border-bottom: 1rpx solid #eeeeee;
     .quantity {
-      font-size: 24rpx;
       margin-right: 16rpx;
+      font-size: 24rpx;
     }
-
     .amount {
-      color: #444;
       margin-left: 6rpx;
+      color: #444444;
     }
-
     .symbol {
       font-size: 20rpx;
     }
   }
-
   .action {
     display: flex;
-    justify-content: flex-end;
     align-items: center;
+    justify-content: flex-end;
     padding-top: 20rpx;
-
     .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       width: 180rpx;
       height: 60rpx;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       margin-left: 20rpx;
-      border-radius: 60rpx;
-      border: 1rpx solid #ccc;
       font-size: 26rpx;
-      color: #444;
+      color: #444444;
+      border: 1rpx solid #cccccc;
+      border-radius: 60rpx;
     }
-
     .secondary {
       color: #27ba9b;
       border-color: #27ba9b;
     }
-
     .primary {
-      color: #fff;
+      color: #ffffff;
       background-color: #27ba9b;
       border-color: #27ba9b;
     }
   }
-
   .loading-text {
-    text-align: center;
-    font-size: 28rpx;
-    color: #666;
     padding: 20rpx 0;
+    font-size: 28rpx;
+    color: #666666;
+    text-align: center;
   }
 }
 </style>

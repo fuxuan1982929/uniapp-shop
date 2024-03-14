@@ -35,88 +35,81 @@
 
 <style lang="scss">
 .address-panel {
-  padding: 0 30rpx;
-  border-radius: 10rpx 10rpx 0 0;
   position: relative;
-  background-color: #fff;
+  padding: 0 30rpx;
+  background-color: #ffffff;
+  border-radius: 10rpx 10rpx 0 0;
 }
-
 .title {
-  line-height: 1;
   padding: 40rpx 0;
-  text-align: center;
   font-size: 32rpx;
   font-weight: normal;
-  border-bottom: 1rpx solid #ddd;
-  color: #444;
+  line-height: 1;
+  color: #444444;
+  text-align: center;
+  border-bottom: 1rpx solid #dddddd;
 }
-
 .close {
   position: absolute;
-  right: 24rpx;
   top: 24rpx;
+  right: 24rpx;
 }
-
 .content {
   min-height: 300rpx;
   max-height: 540rpx;
-  overflow: auto;
   padding: 20rpx;
+  overflow: auto;
   .item {
+    position: relative;
     padding: 30rpx 50rpx 30rpx 60rpx;
-    background-size: 40rpx;
+    background-image: url('https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/locate.png');
     background-repeat: no-repeat;
     background-position: 0 center;
-    background-image: url(https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/locate.png);
-    position: relative;
+    background-size: 40rpx;
   }
   .icon {
-    color: #999;
-    font-size: 40rpx;
-    transform: translateY(-50%);
     position: absolute;
     top: 50%;
     right: 0;
+    font-size: 40rpx;
+    color: #999999;
+    transform: translateY(-50%);
   }
   .icon-checked {
     color: #27ba9b;
   }
   .icon-ring {
-    color: #444;
+    color: #444444;
   }
   .user {
     font-size: 28rpx;
-    color: #444;
     font-weight: 500;
+    color: #444444;
   }
   .address {
     font-size: 26rpx;
-    color: #666;
+    color: #666666;
   }
 }
-
 .footer {
   display: flex;
   justify-content: space-between;
   padding: 20rpx 0 40rpx;
   font-size: 28rpx;
-  color: #444;
-
+  color: #444444;
   .button {
     flex: 1;
     height: 72rpx;
-    text-align: center;
-    line-height: 72rpx;
     margin: 0 20rpx;
-    color: #fff;
+    line-height: 72rpx;
+    color: #ffffff;
+    text-align: center;
     border-radius: 72rpx;
   }
-
   .primary {
-    color: #fff;
+    color: #ffffff;
     background-color: #27ba9b;
   }
-
   .secondary {
     background-color: #ffa868;
   }

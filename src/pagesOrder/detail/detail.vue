@@ -152,7 +152,7 @@ const onOrderConfirm = () => {
   uni.showModal({
     content: '为保障您的权益，请收到货并确认无误后，再确认收货',
     confirmColor: '#27BA9B',
-    success: async (success) => {
+    success: async success => {
       if (success.confirm) {
         const res = await putMemberOrderReceiptByIdAPI(query.id)
         // 更新订单状态
@@ -167,7 +167,7 @@ const onOrderDelete = () => {
   uni.showModal({
     content: '是否删除订单',
     confirmColor: '#27BA9B',
-    success: async (success) => {
+    success: async success => {
       if (success.confirm) {
         await deleteMemberOrderAPI({ ids: [query.id] })
         uni.redirectTo({ url: '/pagesOrder/list/list' })
@@ -406,431 +406,369 @@ page {
   height: 100%;
   overflow: hidden;
 }
-
 .navbar {
-  width: 750rpx;
-  color: #000;
   position: fixed;
   top: 0;
   left: 0;
   z-index: 9;
+  width: 750rpx;
+  color: #000000;
+
   /* background-color: #f8f8f8; */
   background-color: transparent;
-
   .wrap {
     position: relative;
-
     .title {
-      height: 44px;
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      height: 44px;
       font-size: 32rpx;
+
       /* color: #000; */
       color: transparent;
     }
-
     .back {
       position: absolute;
       left: 0;
-      height: 44px;
-      width: 44px;
-      font-size: 44rpx;
       display: flex;
       align-items: center;
       justify-content: center;
+      width: 44px;
+      height: 44px;
+      font-size: 44rpx;
+
       /* color: #000; */
-      color: #fff;
+      color: #ffffff;
     }
   }
 }
-
 .viewport {
   background-color: #f7f7f8;
 }
-
 .overview {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  line-height: 1;
   padding-bottom: 30rpx;
-  color: #fff;
-  background-image: url(https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/order_bg.png);
+  line-height: 1;
+  color: #ffffff;
+  background-image: url('https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/order_bg.png');
   background-size: cover;
-
   .status {
     font-size: 36rpx;
   }
-
   .status::before {
     margin-right: 6rpx;
     font-weight: 500;
   }
-
   .tips {
-    margin: 30rpx 0;
     display: flex;
-    font-size: 14px;
     align-items: center;
-
+    margin: 30rpx 0;
+    font-size: 14px;
     .money {
       margin-right: 30rpx;
     }
   }
-
   .button-group {
-    margin-top: 30rpx;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    margin-top: 30rpx;
   }
-
   .button {
     width: 260rpx;
     height: 64rpx;
     margin: 0 10rpx;
-    text-align: center;
-    line-height: 64rpx;
     font-size: 28rpx;
+    line-height: 64rpx;
     color: #27ba9b;
+    text-align: center;
+    background-color: #ffffff;
     border-radius: 68rpx;
-    background-color: #fff;
   }
 }
-
 .shipment {
-  line-height: 1.4;
   padding: 0 20rpx;
   margin: 20rpx 20rpx 0;
+  line-height: 1.4;
+  background-color: #ffffff;
   border-radius: 10rpx;
-  background-color: #fff;
-
   .locate,
   .item {
     min-height: 120rpx;
     padding: 30rpx 30rpx 25rpx 75rpx;
-    background-size: 50rpx;
     background-repeat: no-repeat;
     background-position: 6rpx center;
+    background-size: 50rpx;
   }
-
   .locate {
-    background-image: url(https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/locate.png);
-
+    background-image: url('https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/locate.png');
     .user {
       font-size: 26rpx;
-      color: #444;
+      color: #444444;
     }
-
     .address {
       font-size: 24rpx;
-      color: #666;
+      color: #666666;
     }
   }
-
   .item {
-    background-image: url(https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/car.png);
-    border-bottom: 1rpx solid #eee;
     position: relative;
-
+    background-image: url('https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/car.png');
+    border-bottom: 1rpx solid #eeeeee;
     .message {
       font-size: 26rpx;
-      color: #444;
+      color: #444444;
     }
-
     .date {
       font-size: 24rpx;
-      color: #666;
+      color: #666666;
     }
   }
 }
-
 .goods {
-  margin: 20rpx 20rpx 0;
   padding: 0 20rpx;
+  margin: 20rpx 20rpx 0;
+  background-color: #ffffff;
   border-radius: 10rpx;
-  background-color: #fff;
-
   .item {
     padding: 30rpx 0;
-    border-bottom: 1rpx solid #eee;
-
+    border-bottom: 1rpx solid #eeeeee;
     .navigator {
       display: flex;
       margin: 20rpx 0;
     }
-
     .cover {
       width: 170rpx;
       height: 170rpx;
-      border-radius: 10rpx;
       margin-right: 20rpx;
+      border-radius: 10rpx;
     }
-
     .meta {
-      flex: 1;
+      position: relative;
       display: flex;
+      flex: 1;
       flex-direction: column;
       justify-content: center;
-      position: relative;
     }
-
     .name {
       height: 80rpx;
       font-size: 26rpx;
-      color: #444;
+      color: #444444;
     }
-
     .type {
-      line-height: 1.8;
+      align-self: flex-start;
       padding: 0 15rpx;
       margin-top: 6rpx;
       font-size: 24rpx;
-      align-self: flex-start;
-      border-radius: 4rpx;
-      color: #888;
+      line-height: 1.8;
+      color: #888888;
       background-color: #f7f7f8;
+      border-radius: 4rpx;
     }
-
     .price {
       display: flex;
       margin-top: 6rpx;
       font-size: 24rpx;
     }
-
     .symbol {
       font-size: 20rpx;
     }
-
     .original {
-      color: #999;
+      color: #999999;
       text-decoration: line-through;
     }
-
     .actual {
       margin-left: 10rpx;
-      color: #444;
+      color: #444444;
     }
-
     .text {
       font-size: 22rpx;
     }
-
     .quantity {
       position: absolute;
-      bottom: 0;
       right: 0;
+      bottom: 0;
       font-size: 24rpx;
-      color: #444;
+      color: #444444;
     }
-
     .action {
       display: flex;
       flex-direction: row-reverse;
       justify-content: flex-start;
       padding: 30rpx 0 0;
-
       .button {
+        justify-content: center;
         width: 200rpx;
         height: 60rpx;
-        text-align: center;
-        justify-content: center;
-        line-height: 60rpx;
         margin-left: 20rpx;
-        border-radius: 60rpx;
-        border: 1rpx solid #ccc;
         font-size: 26rpx;
-        color: #444;
+        line-height: 60rpx;
+        color: #444444;
+        text-align: center;
+        border: 1rpx solid #cccccc;
+        border-radius: 60rpx;
       }
-
       .primary {
         color: #27ba9b;
         border-color: #27ba9b;
       }
     }
   }
-
   .total {
-    line-height: 1;
-    font-size: 26rpx;
     padding: 20rpx 0;
-    color: #666;
-
+    font-size: 26rpx;
+    line-height: 1;
+    color: #666666;
     .row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 10rpx 0;
     }
-
     .symbol::before {
-      content: '¥';
-      font-size: 80%;
       margin-right: 3rpx;
+      font-size: 80%;
+      content: '¥';
     }
-
     .primary {
-      color: #cf4444;
       font-size: 36rpx;
+      color: #cf4444;
     }
   }
 }
-
 .detail {
-  line-height: 1;
   padding: 30rpx 20rpx 0;
   margin: 20rpx 20rpx 0;
   font-size: 26rpx;
-  color: #666;
+  line-height: 1;
+  color: #666666;
+  background-color: #ffffff;
   border-radius: 10rpx;
-  background-color: #fff;
-
   .title {
     font-size: 30rpx;
-    color: #444;
+    color: #444444;
   }
-
   .row {
     padding: 20rpx 0;
-
     .item {
-      padding: 10rpx 0;
       display: flex;
       align-items: center;
+      padding: 10rpx 0;
     }
-
     .copy {
-      border-radius: 20rpx;
-      font-size: 20rpx;
-      border: 1px solid #ccc;
       padding: 5rpx 10rpx;
       margin-left: 10rpx;
+      font-size: 20rpx;
+      border: 1px solid #cccccc;
+      border-radius: 20rpx;
     }
   }
 }
-
 .toolbar-height {
-  height: 100rpx;
   box-sizing: content-box;
+  height: 100rpx;
 }
-
 .toolbar {
   position: fixed;
-  left: 0;
   right: 0;
   bottom: calc(var(--window-bottom));
+  left: 0;
   z-index: 1;
-
+  box-sizing: content-box;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
   height: 100rpx;
   padding: 0 20rpx;
-  display: flex;
-  align-items: center;
-  flex-direction: row-reverse;
+  background-color: #ffffff;
   border-top: 1rpx solid #ededed;
   border-bottom: 1rpx solid #ededed;
-  background-color: #fff;
-  box-sizing: content-box;
-
   .button {
     display: flex;
-    justify-content: center;
     align-items: center;
-
+    justify-content: center;
     width: 200rpx;
     height: 72rpx;
     margin-left: 15rpx;
     font-size: 26rpx;
+    color: #444444;
+    border: 1rpx solid #cccccc;
     border-radius: 72rpx;
-    border: 1rpx solid #ccc;
-    color: #444;
   }
-
   .delete {
     order: 4;
     color: #cf4444;
   }
-
   .button {
     order: 3;
   }
-
   .secondary {
     order: 2;
     color: #27ba9b;
     border-color: #27ba9b;
   }
-
   .primary {
     order: 1;
-    color: #fff;
+    color: #ffffff;
     background-color: #27ba9b;
   }
 }
-
 .popup-root {
   padding: 30rpx 30rpx 0;
-  border-radius: 10rpx 10rpx 0 0;
   overflow: hidden;
-
+  border-radius: 10rpx 10rpx 0 0;
   .title {
+    margin-bottom: 30rpx;
     font-size: 30rpx;
     text-align: center;
-    margin-bottom: 30rpx;
   }
-
   .description {
-    font-size: 28rpx;
     padding: 0 20rpx;
-
+    font-size: 28rpx;
     .tips {
-      color: #444;
       margin-bottom: 12rpx;
+      color: #444444;
     }
-
     .cell {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      justify-content: space-between;
       padding: 15rpx 0;
-      color: #666;
+      color: #666666;
     }
-
     .icon::before {
-      content: '\e6cd';
-      font-family: 'erabbit' !important;
+      font-family: erabbit !important;
       font-size: 38rpx;
-      color: #999;
+      color: #999999;
+      content: '\e6cd';
     }
-
     .icon.checked::before {
-      content: '\e6cc';
       font-size: 38rpx;
       color: #27ba9b;
+      content: '\e6cc';
     }
   }
-
   .footer {
     display: flex;
     justify-content: space-between;
     padding: 30rpx 0 40rpx;
     font-size: 28rpx;
-    color: #444;
-
+    color: #444444;
     .button {
       flex: 1;
       height: 72rpx;
-      text-align: center;
-      line-height: 72rpx;
       margin: 0 20rpx;
-      color: #444;
+      line-height: 72rpx;
+      color: #444444;
+      text-align: center;
+      border: 1rpx solid #cccccc;
       border-radius: 72rpx;
-      border: 1rpx solid #ccc;
     }
-
     .primary {
-      color: #fff;
+      color: #ffffff;
       background-color: #27ba9b;
       border: none;
     }

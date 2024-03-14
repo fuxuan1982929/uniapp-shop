@@ -17,7 +17,7 @@ const orderTabs = ref([
 ])
 
 // 高亮下标
-const activeIndex = ref(orderTabs.value.findIndex((v) => v.orderState === Number(query.type)))
+const activeIndex = ref(orderTabs.value.findIndex(v => v.orderState === Number(query.type)))
 // 默认渲染容器
 orderTabs.value[activeIndex.value].isRender = true
 </script>
@@ -58,41 +58,39 @@ page {
   height: 100%;
   overflow: hidden;
 }
-
 .viewport {
-  height: 100%;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  height: 100%;
+  background-color: #ffffff;
 }
 
 // tabs
 .tabs {
-  display: flex;
-  justify-content: space-around;
-  line-height: 60rpx;
-  margin: 0 10rpx;
-  background-color: #fff;
-  box-shadow: 0 4rpx 6rpx rgba(240, 240, 240, 0.6);
   position: relative;
   z-index: 9;
-
+  display: flex;
+  justify-content: space-around;
+  margin: 0 10rpx;
+  line-height: 60rpx;
+  background-color: #ffffff;
+  box-shadow: 0 4rpx 6rpx rgb(240 240 240 / 60%);
   .item {
     flex: 1;
-    text-align: center;
     padding: 20rpx;
     font-size: 28rpx;
     color: #262626;
+    text-align: center;
   }
-
   .cursor {
     position: absolute;
-    left: 0;
     bottom: 0;
+    left: 0;
     width: 20%;
     height: 6rpx;
     padding: 0 50rpx;
     background-color: #27ba9b;
+
     /* 过渡效果 */
     transition: all 0.4s;
   }

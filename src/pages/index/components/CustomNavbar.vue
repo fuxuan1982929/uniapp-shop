@@ -7,8 +7,8 @@ const { safeAreaInsets } = uni.getSystemInfoSync()
   <view class="navbar" :style="{ paddingTop: safeAreaInsets!.top + 10 + 'px' }">
     <!-- logo文字 -->
     <view class="logo">
-      <image class="logo-image" src="@/static/images/logo.png"></image>
-      <text class="logo-text">新鲜 · 亲民 · 快捷</text>
+      <image class="logo-image" src="@/static/images/swiky_logo.png"></image>
+      <text class="logo-text">内部服务</text>
     </view>
     <!-- 搜索条 -->
     <view class="search">
@@ -21,12 +21,12 @@ const { safeAreaInsets } = uni.getSystemInfoSync()
 <style lang="scss">
 /* 自定义导航条 */
 .navbar {
-  background-image: url(@/static/images/navigator_bg.png);
-  background-size: cover;
   position: relative;
   display: flex;
   flex-direction: column;
   padding-top: 20px;
+  background-image: url('@/static/images/swiky_bg.png');
+  background-size: cover;
   .logo {
     display: flex;
     align-items: center;
@@ -38,25 +38,25 @@ const { safeAreaInsets } = uni.getSystemInfoSync()
     }
     .logo-text {
       flex: 1;
-      line-height: 28rpx;
-      color: #fff;
-      margin: 2rpx 0 0 20rpx;
       padding-left: 20rpx;
-      border-left: 1rpx solid #fff;
+      margin: 2rpx 0 0 20rpx;
       font-size: 26rpx;
+      line-height: 28rpx;
+      color: #ffffff;
+      border-left: 1rpx solid #ffffff;
     }
   }
   .search {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 10rpx 0 26rpx;
     height: 64rpx;
+    padding: 0 10rpx 0 26rpx;
     margin: 16rpx 20rpx;
-    color: #fff;
     font-size: 28rpx;
+    color: #ffffff;
+    background-color: rgb(255 255 255 / 50%);
     border-radius: 32rpx;
-    background-color: rgba(255, 255, 255, 0.5);
   }
   .icon-search {
     &::before {
@@ -64,8 +64,8 @@ const { safeAreaInsets } = uni.getSystemInfoSync()
     }
   }
   .icon-scan {
-    font-size: 30rpx;
     padding: 15rpx;
+    font-size: 30rpx;
   }
 }
 </style>
