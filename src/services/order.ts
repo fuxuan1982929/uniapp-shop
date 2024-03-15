@@ -1,36 +1,26 @@
-import type { OrderListResult } from '@/types/order'
-import type {
-  OrderCreateParams,
-  OrderListParams,
-  OrderLogisticResult,
-  OrderPreResult,
-  OrderResult,
-} from '@/types/order'
-import { http } from '@/utils/http'
+import type { OrderListResult } from "@/types/order";
+import type { OrderCreateParams, OrderListParams, OrderLogisticResult, OrderPreResult, OrderResult } from "@/types/order";
+import { http } from "@/utils/http";
 /**
  * 填写订单-获取预付订单
  */
 export const getMemberOrderPreAPI = () => {
   return http<OrderPreResult>({
-    method: 'GET',
-    url: '/member/order/pre',
-  })
-}
+    method: "GET",
+    url: "/member/order/pre"
+  });
+};
 
 /**
  * 填写订单-获取立即购买订单
  */
-export const getMemberOrderPreNowAPI = (data: {
-  skuId: string
-  count: string
-  addressId?: string
-}) => {
+export const getMemberOrderPreNowAPI = (data: { skuId: string; count: string; addressId?: string }) => {
   return http<OrderPreResult>({
-    method: 'GET',
-    url: '/member/order/pre/now',
-    data,
-  })
-}
+    method: "GET",
+    url: "/member/order/pre/now",
+    data
+  });
+};
 
 /**
  * 填写订单-再次购买
@@ -38,10 +28,10 @@ export const getMemberOrderPreNowAPI = (data: {
  */
 export const getMemberOrderRepurchaseByIdAPI = (id: string) => {
   return http<OrderPreResult>({
-    method: 'GET',
-    url: `/member/order/repurchase/${id}`,
-  })
-}
+    method: "GET",
+    url: `/member/order/repurchase/${id}`
+  });
+};
 
 /**
  * 提交订单
@@ -49,11 +39,11 @@ export const getMemberOrderRepurchaseByIdAPI = (id: string) => {
  */
 export const postMemberOrderAPI = (data: OrderCreateParams) => {
   return http<{ id: string }>({
-    method: 'POST',
-    url: '/member/order',
-    data,
-  })
-}
+    method: "POST",
+    url: "/member/order",
+    data
+  });
+};
 
 /**
  * 获取订单详情
@@ -61,10 +51,10 @@ export const postMemberOrderAPI = (data: OrderCreateParams) => {
  */
 export const getMemberOrderByIdAPI = (id: string) => {
   return http<OrderResult>({
-    method: 'GET',
-    url: `/member/order/${id}`,
-  })
-}
+    method: "GET",
+    url: `/member/order/${id}`
+  });
+};
 
 /**
  * 模拟发货-内测版
@@ -73,10 +63,10 @@ export const getMemberOrderByIdAPI = (id: string) => {
  */
 export const getMemberOrderConsignmentByIdAPI = (id: string) => {
   return http({
-    method: 'GET',
-    url: `/member/order/consignment/${id}`,
-  })
-}
+    method: "GET",
+    url: `/member/order/consignment/${id}`
+  });
+};
 
 /**
  * 确认收货
@@ -85,10 +75,10 @@ export const getMemberOrderConsignmentByIdAPI = (id: string) => {
  */
 export const putMemberOrderReceiptByIdAPI = (id: string) => {
   return http<OrderResult>({
-    method: 'PUT',
-    url: `/member/order/${id}/receipt`,
-  })
-}
+    method: "PUT",
+    url: `/member/order/${id}/receipt`
+  });
+};
 
 /**
  * 获取订单物流
@@ -97,10 +87,10 @@ export const putMemberOrderReceiptByIdAPI = (id: string) => {
  */
 export const getMemberOrderLogisticsByIdAPI = (id: string) => {
   return http<OrderLogisticResult>({
-    method: 'GET',
-    url: `/member/order/${id}/logistics`,
-  })
-}
+    method: "GET",
+    url: `/member/order/${id}/logistics`
+  });
+};
 
 /**
  * 删除订单
@@ -109,11 +99,11 @@ export const getMemberOrderLogisticsByIdAPI = (id: string) => {
  */
 export const deleteMemberOrderAPI = (data: { ids: string[] }) => {
   return http({
-    method: 'DELETE',
+    method: "DELETE",
     url: `/member/order`,
-    data,
-  })
-}
+    data
+  });
+};
 
 /**
  * 取消订单
@@ -123,11 +113,11 @@ export const deleteMemberOrderAPI = (data: { ids: string[] }) => {
  */
 export const getMemberOrderCancelByIdAPI = (id: string, data: { cancelReason: string }) => {
   return http<OrderResult>({
-    method: 'PUT',
+    method: "PUT",
     url: `/member/order/${id}/cancel`,
-    data,
-  })
-}
+    data
+  });
+};
 
 /**
  * 获取订单列表
@@ -135,8 +125,8 @@ export const getMemberOrderCancelByIdAPI = (id: string, data: { cancelReason: st
  */
 export const getMemberOrderAPI = (data: OrderListParams) => {
   return http<OrderListResult>({
-    method: 'GET',
+    method: "GET",
     url: `/member/order`,
-    data,
-  })
-}
+    data
+  });
+};

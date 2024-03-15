@@ -13,7 +13,7 @@
       :class="{ 'safe-area-inset-bottom': safeAreaInsetBottom }"
       :style="{
         borderRadius: borderRadius + 'rpx ' + borderRadius + 'rpx 0 0',
-        paddingBottom: safeBottom + 'px',
+        paddingBottom: safeBottom + 'px'
       }"
     >
       <view class="specification-wrapper">
@@ -31,37 +31,27 @@
             <view class="specification-right">
               <view class="price-content" :style="{ color: themeColorFn('priceColor') }">
                 <text class="sign">¥</text>
-                <text class="price" :class="priceCom.length > 16 ? 'price2' : ''">{{
-                  priceCom
-                }}</text>
+                <text class="price" :class="priceCom.length > 16 ? 'price2' : ''">{{ priceCom }}</text>
               </view>
               <view class="inventory" v-if="!hideStock">{{ stockText }}：{{ stockCom }}</view>
               <view class="inventory" v-else></view>
-              <view class="choose" v-show="isManyCom">已选：{{ selectArr.join(' ') }}</view>
+              <view class="choose" v-show="isManyCom">已选：{{ selectArr.join(" ") }}</view>
             </view>
           </view>
 
           <view class="specification-content">
-            <view
-              v-show="isManyCom"
-              class="specification-item"
-              v-for="(item, index1) in goodsInfo[specListName]"
-              :key="index1"
-            >
+            <view v-show="isManyCom" class="specification-item" v-for="(item, index1) in goodsInfo[specListName]" :key="index1">
               <view class="item-title">{{ item.name }}</view>
               <view class="item-wrapper">
                 <view
                   class="item-content"
                   v-for="(item_value, index2) in item.list"
                   :key="index2"
-                  :class="[
-                    item_value.ishow ? '' : 'noactived',
-                    subIndex[index1] == index2 ? 'actived' : '',
-                  ]"
+                  :class="[item_value.ishow ? '' : 'noactived', subIndex[index1] == index2 ? 'actived' : '']"
                   :style="[
                     item_value.ishow ? '' : themeColorFn('disableStyle'),
                     item_value.ishow ? themeColorFn('btnStyle') : '',
-                    subIndex[index1] == index2 ? themeColorFn('activedStyle') : '',
+                    subIndex[index1] == index2 ? themeColorFn('activedStyle') : ''
                   ]"
                   @click="skuClick(item_value, index1, index2)"
                 >
@@ -91,9 +81,7 @@
       </view>
 
       <view class="btn-wrapper" v-if="outFoStock || mode == 4">
-        <view class="sure" style="color: #ffffff; background-color: #cccccc">{{
-          noStockText
-        }}</view>
+        <view class="sure" style="color: #ffffff; background-color: #cccccc">{{ noStockText }}</view>
       </view>
       <view class="btn-wrapper" v-else-if="mode == 1">
         <view
@@ -101,7 +89,7 @@
           style="border-radius: 38rpx 0rpx 0rpx 38rpx"
           :style="{
             color: themeColorFn('addCartColor'),
-            backgroundColor: themeColorFn('addCartBackgroundColor'),
+            backgroundColor: themeColorFn('addCartBackgroundColor')
           }"
           @click="addCart"
         >
@@ -113,7 +101,7 @@
           style="border-radius: 0rpx 38rpx 38rpx 0rpx"
           :style="{
             color: themeColorFn('buyNowColor'),
-            backgroundColor: themeColorFn('buyNowBackgroundColor'),
+            backgroundColor: themeColorFn('buyNowBackgroundColor')
           }"
           @click="buyNow"
         >
@@ -125,7 +113,7 @@
           class="sure add-cart"
           :style="{
             color: themeColorFn('addCartColor'),
-            backgroundColor: themeColorFn('addCartBackgroundColor'),
+            backgroundColor: themeColorFn('addCartBackgroundColor')
           }"
           @click="addCart"
         >
@@ -137,7 +125,7 @@
           class="sure"
           :style="{
             color: themeColorFn('buyNowColor'),
-            backgroundColor: themeColorFn('buyNowBackgroundColor'),
+            backgroundColor: themeColorFn('buyNowBackgroundColor')
           }"
           @click="buyNow"
         >

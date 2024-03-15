@@ -2,29 +2,29 @@
 import type {
   SkuPopupEvent,
   SkuPopupInstance,
-  SkuPopupLocaldata,
-} from '@/components/vk-data-goods-sku-popup/vk-data-goods-sku-popup'
-import { postMemberCartAPI } from '@/services/cart'
-import { getGoodsByIdAPI } from '@/services/goods'
-import type { GoodsResult } from '@/types/goods'
-import { onLoad } from '@dcloudio/uni-app'
-import { computed, ref } from 'vue'
-import AddressPanel from './components/AddressPanel.vue'
-import ServicePanel from './components/ServicePanel.vue'
+  SkuPopupLocaldata
+} from "@/components/vk-data-goods-sku-popup/vk-data-goods-sku-popup";
+import { postMemberCartAPI } from "@/services/cart";
+import { getGoodsByIdAPI } from "@/services/goods";
+import type { GoodsResult } from "@/types/goods";
+import { onLoad } from "@dcloudio/uni-app";
+import { computed, ref } from "vue";
+import AddressPanel from "./components/AddressPanel.vue";
+import ServicePanel from "./components/ServicePanel.vue";
 
 // 获取屏幕边界到安全区域距离
-const { safeAreaInsets } = uni.getSystemInfoSync()
+const { safeAreaInsets } = uni.getSystemInfoSync();
 
 // 接收页面参数
 const query = defineProps<{
-  id: string
-}>()
+  id: string;
+}>();
 
 // 获取商品详情信息
-const goods = ref<GoodsResult>()
+const goods = ref<GoodsResult>();
 const getGoodsByIdData = async () => {
-  const res = await getGoodsByIdAPI(query.id)
-  goods.value = res.result
+  const res = await getGoodsByIdAPI(query.id);
+  goods.value = res.result;
   // SKU组件所需格式
   localdata.value = {
     _id: res.result.id,
@@ -33,8 +33,8 @@ const getGoodsByIdData = async () => {
     spec_list: res.result.specs.map(v => {
       return {
         name: v.name,
-        list: v.values,
-      }
+        list: v.values
+      };
     }),
     sku_list: res.result.skus.map(v => {
       return {
@@ -44,79 +44,79 @@ const getGoodsByIdData = async () => {
         image: v.picture,
         price: v.price * 100, // 注意：需要乘以 100
         stock: v.inventory,
-        sku_name_arr: v.specs.map(vv => vv.valueName),
-      }
-    }),
-  }
-}
+        sku_name_arr: v.specs.map(vv => vv.valueName)
+      };
+    })
+  };
+};
 
 // 页面加载
 onLoad(() => {
-  getGoodsByIdData()
-})
+  getGoodsByIdData();
+});
 
 // 轮播图变化时
-const currentIndex = ref(0)
+const currentIndex = ref(0);
 const onChange: UniHelper.SwiperOnChange = ev => {
-  currentIndex.value = ev.detail.current
-}
+  currentIndex.value = ev.detail.current;
+};
 
 // 点击图片时
 const onTapImage = (url: string) => {
   // 大图预览
   uni.previewImage({
     current: url,
-    urls: goods.value!.mainPictures,
-  })
-}
+    urls: goods.value!.mainPictures
+  });
+};
 
 // uni-ui 弹出层组件 ref
 const popup = ref<{
-  open: (type?: UniHelper.UniPopupType) => void
-  close: () => void
-}>()
+  open: (type?: UniHelper.UniPopupType) => void;
+  close: () => void;
+}>();
 
 // 弹出层条件渲染
-const popupName = ref<'address' | 'service'>()
+const popupName = ref<"address" | "service">();
 const openPopup = (name: typeof popupName.value) => {
   // 修改弹出层名称
-  popupName.value = name
-  popup.value?.open()
-}
+  popupName.value = name;
+  popup.value?.open();
+};
 // 是否显示SKU组件
-const isShowSku = ref(false)
+const isShowSku = ref(false);
 // 商品信息
-const localdata = ref({} as SkuPopupLocaldata)
+const localdata = ref({} as SkuPopupLocaldata);
 // 按钮模式
 enum SkuMode {
   Both = 1,
   Cart = 2,
-  Buy = 3,
+  Buy = 3
 }
-const mode = ref<SkuMode>(SkuMode.Cart)
+const mode = ref<SkuMode>(SkuMode.Cart);
 // 打开SKU弹窗修改按钮模式
 const openSkuPopup = (val: SkuMode) => {
   // 显示SKU弹窗
-  isShowSku.value = true
+  isShowSku.value = true;
   // 修改按钮模式
-  mode.value = val
-}
+  mode.value = val;
+};
 // SKU组件实例
-const skuPopupRef = ref<SkuPopupInstance>()
+const skuPopupRef = ref<SkuPopupInstance>();
 // 计算被选中的值
 const selectArrText = computed(() => {
-  return skuPopupRef.value?.selectArr?.join(' ').trim() || '请选择商品规格'
-})
+  return skuPopupRef.value?.selectArr?.join(" ").trim() || "请选择商品规格";
+});
 // 加入购物车事件
 const onAddCart = async (ev: SkuPopupEvent) => {
-  await postMemberCartAPI({ skuId: ev._id, count: ev.buy_num })
-  uni.showToast({ title: '添加成功' })
-  isShowSku.value = false
-}
+  await postMemberCartAPI({ skuId: ev._id, count: ev.buy_num });
+  uni.showToast({ title: "添加成功" });
+  isShowSku.value = false;
+};
 // 立即购买
 const onBuyNow = (ev: SkuPopupEvent) => {
-  uni.navigateTo({ url: `/pagesOrder/create/create?skuId=${ev._id}&count=${ev.buy_num}` })
-}
+  uni.navigateTo({ url: `/pagesOrder/create/create?skuId=${ev._id}&count=${ev.buy_num}` });
+};
 </script>
 
 <template>
@@ -131,7 +131,7 @@ const onBuyNow = (ev: SkuPopupEvent) => {
     :actived-style="{
       color: '#27BA9B',
       borderColor: '#27BA9B',
-      backgroundColor: '#E9F8F5',
+      backgroundColor: '#E9F8F5'
     }"
     @add-cart="onAddCart"
     @buy-now="onBuyNow"
@@ -194,13 +194,7 @@ const onBuyNow = (ev: SkuPopupEvent) => {
           </view>
         </view>
         <!-- 图片详情 -->
-        <image
-          class="image"
-          v-for="item in goods?.details.pictures"
-          :key="item"
-          mode="widthFix"
-          :src="item"
-        ></image>
+        <image class="image" v-for="item in goods?.details.pictures" :key="item" mode="widthFix" :src="item"></image>
       </view>
     </view>
 
@@ -233,9 +227,7 @@ const onBuyNow = (ev: SkuPopupEvent) => {
     <view class="icons">
       <button class="icons-button"><text class="icon-heart"></text>收藏</button>
       <!-- #ifdef MP-WEIXIN -->
-      <button class="icons-button" open-type="contact">
-        <text class="icon-handset"></text>客服
-      </button>
+      <button class="icons-button" open-type="contact"><text class="icon-handset"></text>客服</button>
       <!-- #endif -->
       <navigator class="icons-button" url="/pages/cart/cart2" open-type="navigate">
         <text class="icon-cart"></text>购物车
@@ -296,7 +288,7 @@ page {
     font-family: erabbit !important;
     font-size: 32rpx;
     color: #cccccc;
-    content: '\e6c2';
+    content: "\e6c2";
     transform: translateY(-50%);
   }
 }

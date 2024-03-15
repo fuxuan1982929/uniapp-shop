@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // 获取屏幕边界到安全区域距离
-const { safeAreaInsets } = uni.getSystemInfoSync()
+const { safeAreaInsets } = uni.getSystemInfoSync();
 </script>
 
 <template>
@@ -25,7 +25,7 @@ const { safeAreaInsets } = uni.getSystemInfoSync()
   display: flex;
   flex-direction: column;
   padding-top: 20px;
-  background-image: url('@/static/images/swiky_bg.png');
+  background-image: url("@/static/images/swiky_bg.png");
   background-size: cover;
   .logo {
     display: flex;

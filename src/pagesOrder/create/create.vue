@@ -3,73 +3,73 @@ import {
   getMemberOrderPreAPI,
   getMemberOrderPreNowAPI,
   getMemberOrderRepurchaseByIdAPI,
-  postMemberOrderAPI,
-} from '@/services/order'
-import { useAddressStore } from '@/stores/modules/address'
-import type { OrderPreResult } from '@/types/order'
-import { onLoad } from '@dcloudio/uni-app'
-import { computed, ref } from 'vue'
+  postMemberOrderAPI
+} from "@/services/order";
+import { useAddressStore } from "@/stores/modules/address";
+import type { OrderPreResult } from "@/types/order";
+import { onLoad } from "@dcloudio/uni-app";
+import { computed, ref } from "vue";
 
 // 获取屏幕边界到安全区域距离
-const { safeAreaInsets } = uni.getSystemInfoSync()
+const { safeAreaInsets } = uni.getSystemInfoSync();
 // 订单备注
-const buyerMessage = ref('')
+const buyerMessage = ref("");
 // 配送时间
 const deliveryList = ref([
-  { type: 1, text: '时间不限 (周一至周日)' },
-  { type: 2, text: '工作日送 (周一至周五)' },
-  { type: 3, text: '周末配送 (周六至周日)' },
-])
+  { type: 1, text: "时间不限 (周一至周日)" },
+  { type: 2, text: "工作日送 (周一至周五)" },
+  { type: 3, text: "周末配送 (周六至周日)" }
+]);
 // 当前配送时间下标
-const activeIndex = ref(0)
+const activeIndex = ref(0);
 // 当前配送时间
-const activeDelivery = computed(() => deliveryList.value[activeIndex.value])
+const activeDelivery = computed(() => deliveryList.value[activeIndex.value]);
 // 修改配送时间
 const onChangeDelivery: UniHelper.SelectorPickerOnChange = ev => {
-  activeIndex.value = ev.detail.value
-}
+  activeIndex.value = ev.detail.value;
+};
 
 // 页面参数
 const query = defineProps<{
-  skuId?: string
-  count?: string
-  orderId?: string
-}>()
+  skuId?: string;
+  count?: string;
+  orderId?: string;
+}>();
 
 // 获取订单信息
-const orderPre = ref<OrderPreResult>()
+const orderPre = ref<OrderPreResult>();
 const getMemberOrderPreData = async () => {
   if (query.count && query.skuId) {
     const res = await getMemberOrderPreNowAPI({
       count: query.count,
-      skuId: query.skuId,
-    })
-    orderPre.value = res.result
+      skuId: query.skuId
+    });
+    orderPre.value = res.result;
   } else if (query.orderId) {
     // 再次购买
-    const res = await getMemberOrderRepurchaseByIdAPI(query.orderId)
-    orderPre.value = res.result
+    const res = await getMemberOrderRepurchaseByIdAPI(query.orderId);
+    orderPre.value = res.result;
   } else {
-    const res = await getMemberOrderPreAPI()
-    orderPre.value = res.result
+    const res = await getMemberOrderPreAPI();
+    orderPre.value = res.result;
   }
-}
+};
 
 onLoad(() => {
-  getMemberOrderPreData()
-})
+  getMemberOrderPreData();
+});
 
-const addressStore = useAddressStore()
+const addressStore = useAddressStore();
 // 收货地址
 const selecteAddress = computed(() => {
-  return addressStore.selectedAddress || orderPre.value?.userAddresses.find(v => v.isDefault)
-})
+  return addressStore.selectedAddress || orderPre.value?.userAddresses.find(v => v.isDefault);
+});
 
 // 提交订单
 const onOrderSubmit = async () => {
   // 没有收货地址提醒
   if (!selecteAddress.value?.id) {
-    return uni.showToast({ icon: 'none', title: '请选择收货地址' })
+    return uni.showToast({ icon: "none", title: "请选择收货地址" });
   }
   // 发送请求
   const res = await postMemberOrderAPI({
@@ -78,32 +78,22 @@ const onOrderSubmit = async () => {
     deliveryTimeType: activeDelivery.value.type,
     goods: orderPre.value!.goods.map(v => ({ count: v.count, skuId: v.skuId })),
     payChannel: 2,
-    payType: 1,
-  })
+    payType: 1
+  });
   // 关闭当前页面，跳转到订单详情，传递订单id
-  uni.redirectTo({ url: `/pagesOrder/detail/detail?id=${res.result.id}` })
-}
+  uni.redirectTo({ url: `/pagesOrder/detail/detail?id=${res.result.id}` });
+};
 </script>
 
 <template>
   <scroll-view enable-back-to-top scroll-y class="viewport">
     <!-- 收货地址 -->
-    <navigator
-      v-if="selecteAddress"
-      class="shipment"
-      hover-class="none"
-      url="/pagesMember/address/address?from=order"
-    >
+    <navigator v-if="selecteAddress" class="shipment" hover-class="none" url="/pagesMember/address/address?from=order">
       <view class="user"> {{ selecteAddress.receiver }} {{ selecteAddress.contact }} </view>
       <view class="address"> {{ selecteAddress.fullLocation }} {{ selecteAddress.address }} </view>
       <text class="icon icon-right"></text>
     </navigator>
-    <navigator
-      v-else
-      class="shipment"
-      hover-class="none"
-      url="/pagesMember/address/address?from=order"
-    >
+    <navigator v-else class="shipment" hover-class="none" url="/pagesMember/address/address?from=order">
       <view class="address"> 请选择收货地址 </view>
       <text class="icon icon-right"></text>
     </navigator>
@@ -140,12 +130,7 @@ const onOrderSubmit = async () => {
       </view>
       <view class="item">
         <text class="text">订单备注</text>
-        <input
-          class="input"
-          :cursor-spacing="30"
-          placeholder="选题，建议留言前先与商家沟通确认"
-          v-model="buyerMessage"
-        />
+        <input class="input" :cursor-spacing="30" placeholder="选题，建议留言前先与商家沟通确认" v-model="buyerMessage" />
       </view>
     </view>
 
@@ -167,9 +152,7 @@ const onOrderSubmit = async () => {
     <view class="total-pay symbol">
       <text class="number">{{ orderPre?.summary.totalPayPrice.toFixed(2) }}</text>
     </view>
-    <view class="button" :class="{ disabled: !selecteAddress?.id }" @tap="onOrderSubmit">
-      提交订单
-    </view>
+    <view class="button" :class="{ disabled: !selecteAddress?.id }" @tap="onOrderSubmit"> 提交订单 </view>
   </view>
 </template>
 
@@ -184,15 +167,15 @@ page {
 .symbol::before {
   margin-right: 5rpx;
   font-size: 80%;
-  content: '¥';
+  content: "¥";
 }
 .shipment {
   position: relative;
   padding: 30rpx 30rpx 30rpx 84rpx;
   margin: 20rpx;
   font-size: 26rpx;
-  background: url('https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/locate.png')
-    20rpx center / 50rpx no-repeat #ffffff;
+  background: url("https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/locate.png") 20rpx center / 50rpx no-repeat
+    #ffffff;
   border-radius: 10rpx;
   .icon {
     position: absolute;
@@ -302,7 +285,7 @@ page {
     color: #666666;
   }
   .picker::after {
-    content: '\e6c2';
+    content: "\e6c2";
   }
 }
 

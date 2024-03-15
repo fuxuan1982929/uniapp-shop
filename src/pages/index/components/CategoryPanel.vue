@@ -1,21 +1,15 @@
 <script setup lang="ts">
-import type { CategoryItem } from '@/types/home'
+import type { CategoryItem } from "@/types/home";
 
 // 定义 props 接收数据
 defineProps<{
-  list: CategoryItem[]
-}>()
+  list: CategoryItem[];
+}>();
 </script>
 
 <template>
   <view class="category">
-    <navigator
-      class="category-item"
-      hover-class="none"
-      url="/pages/hot/hot?type=1"
-      v-for="item in list"
-      :key="item.id"
-    >
+    <navigator class="category-item" hover-class="none" url="/pages/hot/hot?type=1" v-for="item in list" :key="item.id">
       <image class="icon" :src="item.icon"></image>
       <text class="text">{{ item.name }}</text>
     </navigator>
@@ -23,5 +17,5 @@ defineProps<{
 </template>
 
 <style lang="scss">
-@import '../styles/category.scss';
+@import "../styles/category.scss";
 </style>

@@ -62,7 +62,7 @@
   .item {
     position: relative;
     padding: 30rpx 50rpx 30rpx 60rpx;
-    background-image: url('https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/locate.png');
+    background-image: url("https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/locate.png");
     background-repeat: no-repeat;
     background-position: 0 center;
     background-size: 40rpx;

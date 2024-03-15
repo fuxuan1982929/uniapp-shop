@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import { getMemberProfileAPI, putMemberProfileAPI } from '@/services/profile'
-import { useMemberStore } from '@/stores'
-import type { Gender, ProfileDetail } from '@/types/member'
-import { formatDate } from '@/utils'
-import { onLoad } from '@dcloudio/uni-app'
-import { ref } from 'vue'
+import { getMemberProfileAPI, putMemberProfileAPI } from "@/services/profile";
+import { useMemberStore } from "@/stores";
+import type { Gender, ProfileDetail } from "@/types/member";
+import { formatDate } from "@/utils";
+import { onLoad } from "@dcloudio/uni-app";
+import { ref } from "vue";
 
 // 获取屏幕边界到安全区域距离
-const { safeAreaInsets } = uni.getSystemInfoSync()
+const { safeAreaInsets } = uni.getSystemInfoSync();
 
 // 获取个人信息，修改个人信息需提供初始值
-const profile = ref({} as ProfileDetail)
+const profile = ref({} as ProfileDetail);
 const getMemberProfileData = async () => {
-  const res = await getMemberProfileAPI()
-  profile.value = res.result
+  const res = await getMemberProfileAPI();
+  profile.value = res.result;
   // 同步 Store 的头像和昵称，用于我的页面展示
-  memberStore.profile!.avatar = res.result.avatar
-  memberStore.profile!.nickname = res.result.nickname
-}
+  memberStore.profile!.avatar = res.result.avatar;
+  memberStore.profile!.nickname = res.result.nickname;
+};
 
 onLoad(() => {
-  getMemberProfileData()
-})
+  getMemberProfileData();
+});
 
-const memberStore = useMemberStore()
+const memberStore = useMemberStore();
 // 修改头像
 const onAvatarChange = () => {
   // 调用拍照/选择图片
@@ -34,11 +34,11 @@ const onAvatarChange = () => {
     count: 1,
     success: res => {
       // 文件路径
-      const tempFilePaths = res.tempFilePaths
+      const tempFilePaths = res.tempFilePaths;
       // 上传
-      uploadFile(tempFilePaths[0])
-    },
-  })
+      uploadFile(tempFilePaths[0]);
+    }
+  });
   // #endif
 
   // #ifdef MP-WEIXIN
@@ -47,76 +47,76 @@ const onAvatarChange = () => {
     // 文件个数
     count: 1,
     // 文件类型
-    mediaType: ['image'],
+    mediaType: ["image"],
     success: res => {
       // 本地路径
-      const { tempFilePath } = res.tempFiles[0]
+      const { tempFilePath } = res.tempFiles[0];
       // 上传
-      uploadFile(tempFilePath)
-    },
-  })
+      uploadFile(tempFilePath);
+    }
+  });
   // #endif
-}
+};
 
 // 文件上传-兼容小程序端、H5端、App端
 const uploadFile = (file: string) => {
   // 文件上传
   uni.uploadFile({
-    url: '/member/profile/avatar',
-    name: 'file',
+    url: "/member/profile/avatar",
+    name: "file",
     filePath: file,
     success: res => {
       if (res.statusCode === 200) {
-        const avatar = JSON.parse(res.data).result.avatar
+        const avatar = JSON.parse(res.data).result.avatar;
         // 个人信息页数据更新
-        profile.value!.avatar = avatar
+        profile.value!.avatar = avatar;
         // Store头像更新
-        memberStore.profile!.avatar = avatar
-        uni.showToast({ icon: 'success', title: '更新成功' })
+        memberStore.profile!.avatar = avatar;
+        uni.showToast({ icon: "success", title: "更新成功" });
       } else {
-        uni.showToast({ icon: 'error', title: '出现错误' })
+        uni.showToast({ icon: "error", title: "出现错误" });
       }
-    },
-  })
-}
+    }
+  });
+};
 
 // 修改性别
 const onGenderChange: UniHelper.RadioGroupOnChange = ev => {
-  profile.value.gender = ev.detail.value as Gender
-}
+  profile.value.gender = ev.detail.value as Gender;
+};
 
 // 修改生日
 const onBirthdayChange: UniHelper.DatePickerOnChange = ev => {
-  profile.value.birthday = ev.detail.value
-}
+  profile.value.birthday = ev.detail.value;
+};
 
 // 修改城市
-let fullLocationCode: [string, string, string] = ['', '', '']
+let fullLocationCode: [string, string, string] = ["", "", ""];
 const onFullLocationChange: UniHelper.RegionPickerOnChange = ev => {
   // 修改前端界面
-  profile.value.fullLocation = ev.detail.value.join(' ')
+  profile.value.fullLocation = ev.detail.value.join(" ");
   // 提交后端更新
-  fullLocationCode = ev.detail.code!
-}
+  fullLocationCode = ev.detail.code!;
+};
 
 // 点击保存提交表单
 const onSubmit = async () => {
-  const { nickname, gender, birthday } = profile.value
+  const { nickname, gender, birthday } = profile.value;
   const res = await putMemberProfileAPI({
     nickname,
     gender,
     birthday,
     provinceCode: fullLocationCode[0],
     cityCode: fullLocationCode[1],
-    countyCode: fullLocationCode[2],
-  })
+    countyCode: fullLocationCode[2]
+  });
   // 更新Store昵称
-  memberStore.profile!.nickname = res.result.nickname
-  uni.showToast({ icon: 'success', title: '保存成功' })
+  memberStore.profile!.nickname = res.result.nickname;
+  uni.showToast({ icon: "success", title: "保存成功" });
   setTimeout(() => {
-    uni.navigateBack()
-  }, 400)
-}
+    uni.navigateBack();
+  }, 400);
+};
 </script>
 
 <template>
@@ -176,12 +176,7 @@ const onSubmit = async () => {
         <!-- #ifdef MP-WEIXIN -->
         <view class="form-item">
           <text class="label">城市</text>
-          <picker
-            @change="onFullLocationChange"
-            mode="region"
-            class="picker"
-            :value="profile?.fullLocation?.split(' ')"
-          >
+          <picker @change="onFullLocationChange" mode="region" class="picker" :value="profile?.fullLocation?.split(' ')">
             <view v-if="profile?.fullLocation">{{ profile.fullLocation }}</view>
             <view class="placeholder" v-else>请选择城市</view>
           </picker>
@@ -206,7 +201,7 @@ page {
   display: flex;
   flex-direction: column;
   height: 100%;
-  background-image: url('https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/order_bg.png');
+  background-image: url("https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/order_bg.png");
   background-repeat: no-repeat;
   background-size: auto 420rpx;
 }

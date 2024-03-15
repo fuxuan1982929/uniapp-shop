@@ -1,123 +1,116 @@
 <script setup lang="ts">
-import type { InputNumberBoxEvent } from '@/components/vk-data-input-number-box/vk-data-input-number-box'
-import { useGuessList } from '@/composables'
-import {
-  deleteMemberCartAPI,
-  getMemberCartAPI,
-  putMemberCartBySkuIdAPI,
-  putMemberCartSelectedAPI,
-} from '@/services/cart'
-import { useMemberStore } from '@/stores'
-import type { CartItem } from '@/types/cart'
-import { onShow } from '@dcloudio/uni-app'
-import { computed, ref } from 'vue'
+import type { InputNumberBoxEvent } from "@/components/vk-data-input-number-box/vk-data-input-number-box";
+import { useGuessList } from "@/composables";
+import { deleteMemberCartAPI, getMemberCartAPI, putMemberCartBySkuIdAPI, putMemberCartSelectedAPI } from "@/services/cart";
+import { useMemberStore } from "@/stores";
+import type { CartItem } from "@/types/cart";
+import { onShow } from "@dcloudio/uni-app";
+import { computed, ref } from "vue";
 
 // 是否适配底部安全区域
 defineProps<{
-  safeAreaInsetBottom?: boolean
-}>()
+  safeAreaInsetBottom?: boolean;
+}>();
 
 // 获取屏幕边界到安全区域距离
-const { safeAreaInsets } = uni.getSystemInfoSync()
+const { safeAreaInsets } = uni.getSystemInfoSync();
 
 // 获取会员Store
-const memberStore = useMemberStore()
+const memberStore = useMemberStore();
 
 // 获取购物车数据
-const cartList = ref<CartItem[]>([])
+const cartList = ref<CartItem[]>([]);
 // 优化购物车空列表状态，默认展示列表
-const showCartList = ref(true)
+const showCartList = ref(true);
 const getMemberCartData = async () => {
-  const res = await getMemberCartAPI()
-  cartList.value = res.result
-  showCartList.value = res.result.length > 0
-}
+  const res = await getMemberCartAPI();
+  cartList.value = res.result;
+  showCartList.value = res.result.length > 0;
+};
 
 // 初始化调用: 页面显示触发
 onShow(() => {
   if (memberStore.profile) {
-    getMemberCartData()
+    getMemberCartData();
   }
-})
+});
 
 // 点击删除按钮
 const onDeleteCart = (skuId: string) => {
   // 弹窗二次确认
   uni.showModal({
-    content: '是否删除',
-    confirmColor: '#27BA9B',
+    content: "是否删除",
+    confirmColor: "#27BA9B",
     success: async res => {
       if (res.confirm) {
         // 后端删除单品
-        await deleteMemberCartAPI({ ids: [skuId] })
+        await deleteMemberCartAPI({ ids: [skuId] });
         // 重新获取列表
-        getMemberCartData()
+        getMemberCartData();
       }
-    },
-  })
-}
+    }
+  });
+};
 
 // 修改商品数量
 const onChangeCount = (ev: InputNumberBoxEvent) => {
-  putMemberCartBySkuIdAPI(ev.index, { count: ev.value })
-}
+  putMemberCartBySkuIdAPI(ev.index, { count: ev.value });
+};
 
 // 修改选中状态-单品修改
 const onChangeSelected = (item: CartItem) => {
   // 前端数据更新-是否选中取反
-  item.selected = !item.selected
+  item.selected = !item.selected;
   // 后端数据更新
-  putMemberCartBySkuIdAPI(item.skuId, { selected: item.selected })
-}
+  putMemberCartBySkuIdAPI(item.skuId, { selected: item.selected });
+};
 
 // 计算全选状态
 const isSelectedAll = computed(() => {
-  return cartList.value.length && cartList.value.every(v => v.selected)
-})
+  return cartList.value.length && cartList.value.every(v => v.selected);
+});
 
 // 修改选中状态-全选修改
 const onChangeSelectedAll = () => {
   // 全选状态取反
-  const _isSelectedAll = !isSelectedAll.value
+  const _isSelectedAll = !isSelectedAll.value;
   // 前端数据更新
   cartList.value.forEach(item => {
-    item.selected = _isSelectedAll
-  })
+    item.selected = _isSelectedAll;
+  });
   // 后端数据更新
-  putMemberCartSelectedAPI({ selected: _isSelectedAll })
-}
+  putMemberCartSelectedAPI({ selected: _isSelectedAll });
+};
 
 // 计算选中单品列表
 const selectedCartList = computed(() => {
-  return cartList.value.filter(v => v.selected)
-})
+  return cartList.value.filter(v => v.selected);
+});
 
 // 计算选中总件数
 const selectedCartListCount = computed(() => {
-  return selectedCartList.value.reduce((sum, item) => sum + item.count, 0)
-})
+  return selectedCartList.value.reduce((sum, item) => sum + item.count, 0);
+});
 
 // 计算选中总金额
 const selectedCartListMoney = computed(() => {
-  return selectedCartList.value
-    .reduce((sum, item) => sum + item.count * item.nowPrice, 0)
-    .toFixed(2)
-})
+  return selectedCartList.value.reduce((sum, item) => sum + item.count * item.nowPrice, 0).toFixed(2);
+});
 
 // 结算按钮
 const gotoPayment = () => {
   if (selectedCartListCount.value === 0) {
     return uni.showToast({
-      icon: 'none',
-      title: '请选择商品',
-    })
+      icon: "none",
+      title: "请选择商品"
+    });
   }
   // 跳转到结算页
-  uni.navigateTo({ url: '/pagesOrder/create/create' })
-}
+  uni.navigateTo({ url: "/pagesOrder/create/create" });
+};
 
 // 猜你喜欢
-const { guessRef, onScrolltolower } = useGuessList()
+const { guessRef, onScrolltolower } = useGuessList();
 </script>
 
 <template>
@@ -138,16 +131,8 @@ const { guessRef, onScrolltolower } = useGuessList()
             <!-- 商品信息 -->
             <view class="goods">
               <!-- 选中状态 -->
-              <text
-                @tap="onChangeSelected(item)"
-                class="checkbox"
-                :class="{ checked: item.selected }"
-              ></text>
-              <navigator
-                :url="`/pages/goods/goods?id=${item.id}`"
-                hover-class="none"
-                class="navigator"
-              >
+              <text @tap="onChangeSelected(item)" class="checkbox" :class="{ checked: item.selected }"></text>
+              <navigator :url="`/pages/goods/goods?id=${item.id}`" hover-class="none" class="navigator">
                 <image mode="aspectFill" class="picture" :src="item.picture"></image>
                 <view class="meta">
                   <view class="name ellipsis">{{ item.name }}</view>
@@ -193,11 +178,7 @@ const { guessRef, onScrolltolower } = useGuessList()
         <text class="text">合计:</text>
         <text class="amount">{{ selectedCartListMoney }}</text>
         <view class="button-grounp">
-          <view
-            @tap="gotoPayment"
-            class="button payment-button"
-            :class="{ disabled: selectedCartListCount === 0 }"
-          >
+          <view @tap="gotoPayment" class="button payment-button" :class="{ disabled: selectedCartListCount === 0 }">
             去结算({{ selectedCartListCount }})
           </view>
         </view>
@@ -278,11 +259,11 @@ const { guessRef, onScrolltolower } = useGuessList()
         font-family: erabbit !important;
         font-size: 40rpx;
         color: #444444;
-        content: '\e6cd';
+        content: "\e6cd";
       }
       &.checked::before {
         color: #27ba9b;
-        content: '\e6cc';
+        content: "\e6cc";
       }
     }
     .picture {
@@ -317,7 +298,7 @@ const { guessRef, onScrolltolower } = useGuessList()
       color: #cf4444;
       &::before {
         font-size: 80%;
-        content: '￥';
+        content: "￥";
       }
     }
 
@@ -426,11 +407,11 @@ const { guessRef, onScrolltolower } = useGuessList()
     margin-right: 8rpx;
     font-family: erabbit !important;
     font-size: 40rpx;
-    content: '\e6cd';
+    content: "\e6cd";
   }
   .checked::before {
     color: #27ba9b;
-    content: '\e6cc';
+    content: "\e6cc";
   }
   .text {
     margin-right: 8rpx;
@@ -446,7 +427,7 @@ const { guessRef, onScrolltolower } = useGuessList()
     }
     &::before {
       font-size: 12px;
-      content: '￥';
+      content: "￥";
     }
   }
   .button-grounp {

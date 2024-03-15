@@ -1,47 +1,47 @@
 <script setup lang="ts">
-import { deleteMemberAddressByIdAPI, getMemberAddressAPI } from '@/services/address'
-import { useAddressStore } from '@/stores/modules/address'
-import type { AddressItem } from '@/types/address'
-import { onShow } from '@dcloudio/uni-app'
-import { ref } from 'vue'
+import { deleteMemberAddressByIdAPI, getMemberAddressAPI } from "@/services/address";
+import { useAddressStore } from "@/stores/modules/address";
+import type { AddressItem } from "@/types/address";
+import { onShow } from "@dcloudio/uni-app";
+import { ref } from "vue";
 
 // 获取收货地址列表数据
-const addressList = ref<AddressItem[]>([])
+const addressList = ref<AddressItem[]>([]);
 const getMemberAddressData = async () => {
-  const res = await getMemberAddressAPI()
-  addressList.value = res.result
-}
+  const res = await getMemberAddressAPI();
+  addressList.value = res.result;
+};
 
 // 初始化调用(页面显示)
 onShow(() => {
-  getMemberAddressData()
-})
+  getMemberAddressData();
+});
 
 // 删除收货地址
 const onDeleteAddress = (id: string) => {
   // 二次确认
   uni.showModal({
-    content: '删除地址?',
-    confirmColor: '#27BA9B',
+    content: "删除地址?",
+    confirmColor: "#27BA9B",
     success: async res => {
       if (res.confirm) {
         // 根据id删除收货地址
-        await deleteMemberAddressByIdAPI(id)
+        await deleteMemberAddressByIdAPI(id);
         // 重新获取收货地址列表
-        getMemberAddressData()
+        getMemberAddressData();
       }
-    },
-  })
-}
+    }
+  });
+};
 
 // 修改收货地址
 const onChangeAddress = (item: AddressItem) => {
   // 修改地址
-  const addressStore = useAddressStore()
-  addressStore.changeSelectedAddress(item)
+  const addressStore = useAddressStore();
+  addressStore.changeSelectedAddress(item);
   // 返回上一页
-  uni.navigateBack()
-}
+  uni.navigateBack();
+};
 </script>
 
 <template>
@@ -81,9 +81,7 @@ const onChangeAddress = (item: AddressItem) => {
     </scroll-view>
     <!-- 添加按钮 -->
     <view class="add-btn">
-      <navigator hover-class="none" url="/pagesMember/address-form/address-form">
-        新建地址
-      </navigator>
+      <navigator hover-class="none" url="/pagesMember/address-form/address-form"> 新建地址 </navigator>
     </view>
   </view>
 </template>

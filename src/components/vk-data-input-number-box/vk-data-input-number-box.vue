@@ -9,7 +9,7 @@
         height: inputHeight + 'rpx',
         color: color,
         fontSize: size + 'rpx',
-        minHeight: '1.4em',
+        minHeight: '1.4em'
       }"
       @touchstart.prevent="btnTouchStart('minus')"
       @touchend.stop.prevent="clearTimer"
@@ -28,7 +28,7 @@
         fontSize: size + 'rpx',
         background: bgColor,
         height: inputHeight + 'rpx',
-        width: inputWidth + 'rpx',
+        width: inputWidth + 'rpx'
       }"
       @blur="onBlur"
     />
@@ -40,7 +40,7 @@
         height: inputHeight + 'rpx',
         color: color,
         fontSize: size + 'rpx',
-        minHeight: '1.4em',
+        minHeight: '1.4em'
       }"
       @touchstart.prevent="btnTouchStart('plus')"
       @touchend.stop.prevent="clearTimer"

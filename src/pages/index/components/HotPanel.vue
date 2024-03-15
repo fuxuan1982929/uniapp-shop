@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { HotItem } from '@/types/home'
+import type { HotItem } from "@/types/home";
 
 // 定义 props 接收数据
 defineProps<{
-  list: HotItem[]
-}>()
+  list: HotItem[];
+}>();
 </script>
 
 <template>
@@ -16,18 +16,12 @@ defineProps<{
         <text class="title-desc">{{ item.alt }}</text>
       </view>
       <navigator hover-class="none" :url="`/pages/hot/hot?type=${item.type}`" class="cards">
-        <image
-          v-for="src in item.pictures"
-          :key="src"
-          class="image"
-          mode="aspectFit"
-          :src="src"
-        ></image>
+        <image v-for="src in item.pictures" :key="src" class="image" mode="aspectFit" :src="src"></image>
       </navigator>
     </view>
   </view>
 </template>
 
 <style lang="scss">
-@import '../styles/hot.scss';
+@import "../styles/hot.scss";
 </style>

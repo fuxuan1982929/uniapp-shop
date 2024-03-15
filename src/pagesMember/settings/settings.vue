@@ -1,32 +1,30 @@
 <script setup lang="ts">
-import { useMemberStore } from '@/stores'
+import { useMemberStore } from "@/stores";
 
-const memberStore = useMemberStore()
+const memberStore = useMemberStore();
 // 退出登录
 const onLogout = () => {
   // 模态弹窗
   uni.showModal({
-    content: '是否退出登录？',
-    confirmColor: '#27BA9B',
+    content: "是否退出登录？",
+    confirmColor: "#27BA9B",
     success: res => {
       if (res.confirm) {
         // 清理用户信息
-        memberStore.clearProfile()
+        memberStore.clearProfile();
         // 返回上一页
-        uni.navigateBack()
+        uni.navigateBack();
       }
-    },
-  })
-}
+    }
+  });
+};
 </script>
 
 <template>
   <view class="viewport">
     <!-- 列表1 -->
     <view class="list" v-if="memberStore.profile">
-      <navigator url="/pagesMember/address/address" hover-class="none" class="item arrow">
-        我的收货地址
-      </navigator>
+      <navigator url="/pagesMember/address/address" hover-class="none" class="item arrow"> 我的收货地址 </navigator>
     </view>
     <!-- #ifdef MP-WEIXIN -->
     <!-- 列表2 -->
@@ -90,7 +88,7 @@ page {
     font-family: erabbit !important;
     font-size: 32rpx;
     color: #cccccc;
-    content: '\e6c2';
+    content: "\e6c2";
     transform: translateY(-50%);
   }
 }

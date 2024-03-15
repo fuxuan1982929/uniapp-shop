@@ -1,215 +1,188 @@
 <script setup lang="ts">
-import { useGuessList } from '@/composables'
-import { OrderState, orderStateList } from '@/services/constants'
+import { useGuessList } from "@/composables";
+import { OrderState, orderStateList } from "@/services/constants";
 import {
   deleteMemberOrderAPI,
   getMemberOrderByIdAPI,
   getMemberOrderCancelByIdAPI,
   getMemberOrderLogisticsByIdAPI,
   getMemberOrderConsignmentByIdAPI,
-  putMemberOrderReceiptByIdAPI,
-} from '@/services/order'
-import type { LogisticItem, OrderResult } from '@/types/order'
-import { onLoad, onReady } from '@dcloudio/uni-app'
-import { ref } from 'vue'
-import PageSkeleton from './components/PageSkeleton.vue'
-import { getPayMockAPI, getPayWxPayMiniPayAPI } from '@/services/pay'
+  putMemberOrderReceiptByIdAPI
+} from "@/services/order";
+import type { LogisticItem, OrderResult } from "@/types/order";
+import { onLoad, onReady } from "@dcloudio/uni-app";
+import { ref } from "vue";
+import PageSkeleton from "./components/PageSkeleton.vue";
+import { getPayMockAPI, getPayWxPayMiniPayAPI } from "@/services/pay";
 
 // 获取屏幕边界到安全区域距离
-const { safeAreaInsets } = uni.getSystemInfoSync()
+const { safeAreaInsets } = uni.getSystemInfoSync();
 // 猜你喜欢
-const { guessRef, onScrolltolower } = useGuessList()
+const { guessRef, onScrolltolower } = useGuessList();
 // 弹出层组件
-const popup = ref<UniHelper.UniPopupInstance>()
+const popup = ref<UniHelper.UniPopupInstance>();
 // 取消原因列表
-const reasonList = ref([
-  '商品无货',
-  '不想要了',
-  '商品信息填错了',
-  '地址信息填写错误',
-  '商品降价',
-  '其它',
-])
+const reasonList = ref(["商品无货", "不想要了", "商品信息填错了", "地址信息填写错误", "商品降价", "其它"]);
 // 订单取消原因
-const reason = ref('')
+const reason = ref("");
 // 复制内容
 const onCopy = (id: string) => {
   // 设置系统剪贴板的内容
-  uni.setClipboardData({ data: id })
-}
+  uni.setClipboardData({ data: id });
+};
 // 获取页面参数
 const query = defineProps<{
-  id: string
-}>()
+  id: string;
+}>();
 
 // 获取页面栈
-const pages = getCurrentPages()
+const pages = getCurrentPages();
 
 // 基于小程序的 Page 类型扩展 uni-app 的 Page
-type PageInstance = Page.PageInstance & WechatMiniprogram.Page.InstanceMethods<any>
+type PageInstance = Page.PageInstance & WechatMiniprogram.Page.InstanceMethods<any>;
 
 // #ifdef MP-WEIXIN
 // 获取当前页面实例，数组最后一项
-const pageInstance = pages.at(-1) as PageInstance
+const pageInstance = pages.at(-1) as PageInstance;
 
 // 页面渲染完毕，绑定动画效果
 onReady(() => {
   // 动画效果,导航栏背景色
-  pageInstance.animate(
-    '.navbar',
-    [{ backgroundColor: 'transparent' }, { backgroundColor: '#f8f8f8' }],
-    1000,
-    {
-      scrollSource: '#scroller',
-      timeRange: 1000,
-      startScrollOffset: 0,
-      endScrollOffset: 50,
-    },
-  )
+  pageInstance.animate(".navbar", [{ backgroundColor: "transparent" }, { backgroundColor: "#f8f8f8" }], 1000, {
+    scrollSource: "#scroller",
+    timeRange: 1000,
+    startScrollOffset: 0,
+    endScrollOffset: 50
+  });
   // 动画效果,导航栏标题
-  pageInstance.animate('.navbar .title', [{ color: 'transparent' }, { color: '#000' }], 1000, {
-    scrollSource: '#scroller',
+  pageInstance.animate(".navbar .title", [{ color: "transparent" }, { color: "#000" }], 1000, {
+    scrollSource: "#scroller",
     timeRange: 1000,
     startScrollOffset: 0,
-    endScrollOffset: 50,
-  })
+    endScrollOffset: 50
+  });
   // 动画效果,导航栏返回按钮
-  pageInstance.animate('.navbar .back', [{ color: '#fff' }, { color: '#000' }], 1000, {
-    scrollSource: '#scroller',
+  pageInstance.animate(".navbar .back", [{ color: "#fff" }, { color: "#000" }], 1000, {
+    scrollSource: "#scroller",
     timeRange: 1000,
     startScrollOffset: 0,
-    endScrollOffset: 50,
-  })
-})
+    endScrollOffset: 50
+  });
+});
 // #endif
 
 // 获取订单详情
-const order = ref<OrderResult>()
+const order = ref<OrderResult>();
 const getMemberOrderByIdData = async () => {
-  const res = await getMemberOrderByIdAPI(query.id)
-  order.value = res.result
-  if (
-    [OrderState.DaiShouHuo, OrderState.DaiPingJia, OrderState.YiWanCheng].includes(
-      order.value.orderState,
-    )
-  ) {
-    getMemberOrderLogisticsByIdData()
+  const res = await getMemberOrderByIdAPI(query.id);
+  order.value = res.result;
+  if ([OrderState.DaiShouHuo, OrderState.DaiPingJia, OrderState.YiWanCheng].includes(order.value.orderState)) {
+    getMemberOrderLogisticsByIdData();
   }
-}
+};
 
 // 获取物流信息
-const logisticList = ref<LogisticItem[]>([])
+const logisticList = ref<LogisticItem[]>([]);
 const getMemberOrderLogisticsByIdData = async () => {
-  const res = await getMemberOrderLogisticsByIdAPI(query.id)
-  logisticList.value = res.result.list
-}
+  const res = await getMemberOrderLogisticsByIdAPI(query.id);
+  logisticList.value = res.result.list;
+};
 
 onLoad(() => {
-  getMemberOrderByIdData()
-})
+  getMemberOrderByIdData();
+});
 
 // 倒计时结束事件
 const onTimeup = () => {
   // 修改订单状态为已取消
-  order.value!.orderState = OrderState.YiQuXiao
-}
+  order.value!.orderState = OrderState.YiQuXiao;
+};
 
 // 订单支付
 const onOrderPay = async () => {
   if (import.meta.env.DEV) {
     // 开发环境模拟支付
-    await getPayMockAPI({ orderId: query.id })
+    await getPayMockAPI({ orderId: query.id });
   } else {
     // #ifdef MP-WEIXIN
     // 正式环境微信支付
-    const res = await getPayWxPayMiniPayAPI({ orderId: query.id })
-    await wx.requestPayment(res.result)
+    const res = await getPayWxPayMiniPayAPI({ orderId: query.id });
+    await wx.requestPayment(res.result);
     // #endif
 
     // #ifdef H5 || APP-PLUS
     // H5端 和 App 端未开通支付-模拟支付体验
-    await getPayMockAPI({ orderId: query.id })
+    await getPayMockAPI({ orderId: query.id });
     // #endif
   }
   // 关闭当前页，再跳转支付结果页
-  uni.redirectTo({ url: `/pagesOrder/payment/payment?id=${query.id}` })
-}
+  uni.redirectTo({ url: `/pagesOrder/payment/payment?id=${query.id}` });
+};
 
 // 是否为开发环境
-const isDev = import.meta.env.DEV
+const isDev = import.meta.env.DEV;
 // 模拟发货
 const onOrderSend = async () => {
   if (isDev) {
-    await getMemberOrderConsignmentByIdAPI(query.id)
-    uni.showToast({ icon: 'success', title: '模拟发货完成' })
+    await getMemberOrderConsignmentByIdAPI(query.id);
+    uni.showToast({ icon: "success", title: "模拟发货完成" });
     // 主动更新订单状态
-    order.value!.orderState = OrderState.DaiShouHuo
+    order.value!.orderState = OrderState.DaiShouHuo;
   }
-}
+};
 // 确认收货
 const onOrderConfirm = () => {
   // 二次确认弹窗
   uni.showModal({
-    content: '为保障您的权益，请收到货并确认无误后，再确认收货',
-    confirmColor: '#27BA9B',
+    content: "为保障您的权益，请收到货并确认无误后，再确认收货",
+    confirmColor: "#27BA9B",
     success: async success => {
       if (success.confirm) {
-        const res = await putMemberOrderReceiptByIdAPI(query.id)
+        const res = await putMemberOrderReceiptByIdAPI(query.id);
         // 更新订单状态
-        order.value = res.result
+        order.value = res.result;
       }
-    },
-  })
-}
+    }
+  });
+};
 // 删除订单
 const onOrderDelete = () => {
   // 二次确认
   uni.showModal({
-    content: '是否删除订单',
-    confirmColor: '#27BA9B',
+    content: "是否删除订单",
+    confirmColor: "#27BA9B",
     success: async success => {
       if (success.confirm) {
-        await deleteMemberOrderAPI({ ids: [query.id] })
-        uni.redirectTo({ url: '/pagesOrder/list/list' })
+        await deleteMemberOrderAPI({ ids: [query.id] });
+        uni.redirectTo({ url: "/pagesOrder/list/list" });
       }
-    },
-  })
-}
+    }
+  });
+};
 
 // 取消订单
 const onOrderCancel = async () => {
   // 发送请求
-  const res = await getMemberOrderCancelByIdAPI(query.id, { cancelReason: reason.value })
+  const res = await getMemberOrderCancelByIdAPI(query.id, { cancelReason: reason.value });
   // 更新订单信息
-  order.value = res.result
+  order.value = res.result;
   // 关闭弹窗
-  popup.value?.close!()
+  popup.value?.close!();
   // 轻提示
-  uni.showToast({ icon: 'none', title: '订单取消成功' })
-}
+  uni.showToast({ icon: "none", title: "订单取消成功" });
+};
 </script>
 
 <template>
   <!-- 自定义导航栏: 默认透明不可见, scroll-view 滚动到 50 时展示 -->
   <view class="navbar" :style="{ paddingTop: safeAreaInsets?.top + 'px' }">
     <view class="wrap">
-      <navigator
-        v-if="pages.length > 1"
-        open-type="navigateBack"
-        class="back icon-left"
-      ></navigator>
-      <navigator v-else url="/pages/index/index" open-type="switchTab" class="back icon-home">
-      </navigator>
+      <navigator v-if="pages.length > 1" open-type="navigateBack" class="back icon-left"></navigator>
+      <navigator v-else url="/pages/index/index" open-type="switchTab" class="back icon-home"> </navigator>
       <view class="title">订单详情</view>
     </view>
   </view>
-  <scroll-view
-    enable-back-to-top
-    scroll-y
-    class="viewport"
-    id="scroller"
-    @scrolltolower="onScrolltolower"
-  >
+  <scroll-view enable-back-to-top scroll-y class="viewport" id="scroller" @scrolltolower="onScrolltolower">
     <template v-if="order">
       <!-- 订单状态 -->
       <view class="overview" :style="{ paddingTop: safeAreaInsets!.top + 20 + 'px' }">
@@ -235,29 +208,13 @@ const onOrderCancel = async () => {
           <!-- 订单状态文字 -->
           <view class="status"> {{ orderStateList[order.orderState].text }} </view>
           <view class="button-group">
-            <navigator
-              class="button"
-              :url="`/pagesOrder/create/create?orderId=${query.id}`"
-              hover-class="none"
-            >
+            <navigator class="button" :url="`/pagesOrder/create/create?orderId=${query.id}`" hover-class="none">
               再次购买
             </navigator>
             <!-- 待发货状态：模拟发货,开发期间使用,用于修改订单状态为已发货 -->
-            <view
-              v-if="isDev && order.orderState == OrderState.DaiFaHuo"
-              @tap="onOrderSend"
-              class="button"
-            >
-              模拟发货
-            </view>
+            <view v-if="isDev && order.orderState == OrderState.DaiFaHuo" @tap="onOrderSend" class="button"> 模拟发货 </view>
             <!-- 待收货状态: 展示确认收货按钮 -->
-            <view
-              v-if="order.orderState === OrderState.DaiShouHuo"
-              @tap="onOrderConfirm"
-              class="button"
-            >
-              确认收货
-            </view>
+            <view v-if="order.orderState === OrderState.DaiShouHuo" @tap="onOrderConfirm" class="button"> 确认收货 </view>
           </view>
         </template>
       </view>
@@ -327,9 +284,7 @@ const onOrderCancel = async () => {
       <view class="detail">
         <view class="title">订单信息</view>
         <view class="row">
-          <view class="item">
-            订单编号: {{ query.id }} <text class="copy" @tap="onCopy(query.id)">复制</text>
-          </view>
+          <view class="item"> 订单编号: {{ query.id }} <text class="copy" @tap="onCopy(query.id)">复制</text> </view>
           <view class="item">下单时间: {{ order.createTime }}</view>
         </view>
       </view>
@@ -347,31 +302,15 @@ const onOrderCancel = async () => {
         </template>
         <!-- 其他订单状态:按需展示按钮 -->
         <template v-else>
-          <navigator
-            class="button secondary"
-            :url="`/pagesOrder/create/create?orderId=${query.id}`"
-            hover-class="none"
-          >
+          <navigator class="button secondary" :url="`/pagesOrder/create/create?orderId=${query.id}`" hover-class="none">
             再次购买
           </navigator>
           <!-- 待收货状态: 展示确认收货 -->
-          <view
-            class="button primary"
-            v-if="order.orderState === OrderState.DaiShouHuo"
-            @tap="onOrderConfirm"
-          >
-            确认收货
-          </view>
+          <view class="button primary" v-if="order.orderState === OrderState.DaiShouHuo" @tap="onOrderConfirm"> 确认收货 </view>
           <!-- 待评价状态: 展示去评价 -->
           <view class="button" v-if="order.orderState === OrderState.DaiPingJia"> 去评价 </view>
           <!-- 待评价/已完成/已取消 状态: 展示删除订单 -->
-          <view
-            class="button delete"
-            v-if="order.orderState >= OrderState.DaiPingJia"
-            @tap="onOrderDelete"
-          >
-            删除订单
-          </view>
+          <view class="button delete" v-if="order.orderState >= OrderState.DaiPingJia" @tap="onOrderDelete"> 删除订单 </view>
         </template>
       </view>
     </template>
@@ -453,7 +392,7 @@ page {
   padding-bottom: 30rpx;
   line-height: 1;
   color: #ffffff;
-  background-image: url('https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/order_bg.png');
+  background-image: url("https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/order_bg.png");
   background-size: cover;
   .status {
     font-size: 36rpx;
@@ -504,7 +443,7 @@ page {
     background-size: 50rpx;
   }
   .locate {
-    background-image: url('https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/locate.png');
+    background-image: url("https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/locate.png");
     .user {
       font-size: 26rpx;
       color: #444444;
@@ -516,7 +455,7 @@ page {
   }
   .item {
     position: relative;
-    background-image: url('https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/car.png');
+    background-image: url("https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/car.png");
     border-bottom: 1rpx solid #eeeeee;
     .message {
       font-size: 26rpx;
@@ -631,7 +570,7 @@ page {
     .symbol::before {
       margin-right: 3rpx;
       font-size: 80%;
-      content: '¥';
+      content: "¥";
     }
     .primary {
       font-size: 36rpx;
@@ -743,12 +682,12 @@ page {
       font-family: erabbit !important;
       font-size: 38rpx;
       color: #999999;
-      content: '\e6cd';
+      content: "\e6cd";
     }
     .icon.checked::before {
       font-size: 38rpx;
       color: #27ba9b;
-      content: '\e6cc';
+      content: "\e6cc";
     }
   }
   .footer {

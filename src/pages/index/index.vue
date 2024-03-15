@@ -1,69 +1,64 @@
 <script setup lang="ts">
-import { getHomeBannerAPI, getHomeCategoryAPI, getHomeHotAPI } from '@/services/home'
-import type { BannerItem, CategoryItem, HotItem } from '@/types/home'
-import { onLoad } from '@dcloudio/uni-app'
-import { ref } from 'vue'
-import CustomNavbar from './components/CustomNavbar.vue'
-import CategoryPanel from './components/CategoryPanel.vue'
-import HotPanel from './components/HotPanel.vue'
-import PageSkeleton from './components/PageSkeleton.vue'
-import { useGuessList } from '@/composables'
+import { getHomeBannerAPI, getHomeCategoryAPI, getHomeHotAPI } from "@/services/home";
+import type { BannerItem, CategoryItem, HotItem } from "@/types/home";
+import { onLoad } from "@dcloudio/uni-app";
+import { ref } from "vue";
+import CustomNavbar from "./components/CustomNavbar.vue";
+import CategoryPanel from "./components/CategoryPanel.vue";
+import HotPanel from "./components/HotPanel.vue";
+import PageSkeleton from "./components/PageSkeleton.vue";
+import { useGuessList } from "@/composables";
 
 // 获取轮播图数据
-const bannerList = ref<BannerItem[]>([])
+const bannerList = ref<BannerItem[]>([]);
 const getHomeBannerData = async () => {
-  const res = await getHomeBannerAPI()
-  bannerList.value = res.result
-}
+  const res = await getHomeBannerAPI();
+  bannerList.value = res.result;
+};
 
 // 获取前台分类数据
-const categoryList = ref<CategoryItem[]>([])
+const categoryList = ref<CategoryItem[]>([]);
 const getHomeCategoryData = async () => {
-  const res = await getHomeCategoryAPI()
+  const res = await getHomeCategoryAPI();
   //categoryList.value = res.result
-  categoryList.value = res
-}
+  categoryList.value = res;
+};
 
 // 获取热门推荐数据
-const hotList = ref<HotItem[]>([])
+const hotList = ref<HotItem[]>([]);
 const getHomeHotData = async () => {
-  const res = await getHomeHotAPI()
-  hotList.value = res.result
-}
+  const res = await getHomeHotAPI();
+  hotList.value = res.result;
+};
 
 // 是否加载中标记
-const isLoading = ref(false)
+const isLoading = ref(false);
 
 // 页面加载
 onLoad(async () => {
-  isLoading.value = true
-  await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHomeHotData()])
-  isLoading.value = false
-})
+  isLoading.value = true;
+  await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHomeHotData()]);
+  isLoading.value = false;
+});
 
 // 猜你喜欢组合式函数调用
-const { guessRef, onScrolltolower } = useGuessList()
+const { guessRef, onScrolltolower } = useGuessList();
 // 当前下拉刷新状态
-const isTriggered = ref(false)
+const isTriggered = ref(false);
 // 自定义下拉刷新被触发
 const onRefresherrefresh = async () => {
   // 开始动画
-  isTriggered.value = true
+  isTriggered.value = true;
   // 加载数据
   // await getHomeBannerData()
   // await getHomeCategoryData()
   // await getHomeHotData()
   // 重置猜你喜欢组件数据
-  guessRef.value?.resetData()
-  await Promise.all([
-    getHomeBannerData(),
-    getHomeCategoryData(),
-    getHomeHotData(),
-    guessRef.value?.getMore(),
-  ])
+  guessRef.value?.resetData();
+  await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHomeHotData(), guessRef.value?.getMore()]);
   // 关闭动画
-  isTriggered.value = false
-}
+  isTriggered.value = false;
+};
 </script>
 
 <template>

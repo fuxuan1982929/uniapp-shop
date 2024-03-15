@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useGuessList } from '@/composables'
+import { useGuessList } from "@/composables";
 
 // 获取页面参数
 const query = defineProps<{
-  id: string
-}>()
+  id: string;
+}>();
 
 // 猜你喜欢
-const { guessRef, onScrolltolower } = useGuessList()
+const { guessRef, onScrolltolower } = useGuessList();
 </script>
 
 <template>
@@ -16,12 +16,7 @@ const { guessRef, onScrolltolower } = useGuessList()
     <view class="overview">
       <view class="status icon-checked">支付成功</view>
       <view class="buttons">
-        <navigator
-          hover-class="none"
-          class="button navigator"
-          url="/pages/index/index"
-          open-type="switchTab"
-        >
+        <navigator hover-class="none" class="button navigator" url="/pages/index/index" open-type="switchTab">
           返回首页
         </navigator>
         <navigator

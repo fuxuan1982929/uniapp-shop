@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import OrderList from './components/OrderList.vue'
+import { ref } from "vue";
+import OrderList from "./components/OrderList.vue";
 
 // 获取页面参数
 const query = defineProps<{
-  type: string
-}>()
+  type: string;
+}>();
 
 // tabs 数据
 const orderTabs = ref([
-  { orderState: 0, title: '全部', isRender: false },
-  { orderState: 1, title: '待付款', isRender: false },
-  { orderState: 2, title: '待发货', isRender: false },
-  { orderState: 3, title: '待收货', isRender: false },
-  { orderState: 4, title: '待评价', isRender: false },
-])
+  { orderState: 0, title: "全部", isRender: false },
+  { orderState: 1, title: "待付款", isRender: false },
+  { orderState: 2, title: "待发货", isRender: false },
+  { orderState: 3, title: "待收货", isRender: false },
+  { orderState: 4, title: "待评价", isRender: false }
+]);
 
 // 高亮下标
-const activeIndex = ref(orderTabs.value.findIndex(v => v.orderState === Number(query.type)))
+const activeIndex = ref(orderTabs.value.findIndex(v => v.orderState === Number(query.type)));
 // 默认渲染容器
-orderTabs.value[activeIndex.value].isRender = true
+orderTabs.value[activeIndex.value].isRender = true;
 </script>
 
 <template>
@@ -32,8 +32,8 @@ orderTabs.value[activeIndex.value].isRender = true
         :key="item.title"
         @tap="
           () => {
-            activeIndex = index
-            item.isRender = true
+            activeIndex = index;
+            item.isRender = true;
           }
         "
       >

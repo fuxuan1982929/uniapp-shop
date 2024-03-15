@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { useGuessList } from '@/composables'
-import { useMemberStore } from '@/stores'
+import { useGuessList } from "@/composables";
+import { useMemberStore } from "@/stores";
 // 获取屏幕边界到安全区域距离
-const { safeAreaInsets } = uni.getSystemInfoSync()
+const { safeAreaInsets } = uni.getSystemInfoSync();
 // 订单选项
 const orderTypes = [
-  { type: '1', text: '待付款', icon: 'icon-currency' },
-  { type: '2', text: '待发货', icon: 'icon-gift' },
-  { type: '3', text: '待收货', icon: 'icon-check' },
-  { type: '4', text: '待评价', icon: 'icon-comment' },
-]
+  { type: "1", text: "待付款", icon: "icon-currency" },
+  { type: "2", text: "待发货", icon: "icon-gift" },
+  { type: "3", text: "待收货", icon: "icon-check" },
+  { type: "4", text: "待评价", icon: "icon-comment" }
+];
 // 获取会员信息
-const memberStore = useMemberStore()
+const memberStore = useMemberStore();
 
-const { guessRef, onScrolltolower } = useGuessList()
+const { guessRef, onScrolltolower } = useGuessList();
 </script>
 
 <template>
@@ -44,17 +44,13 @@ const { guessRef, onScrolltolower } = useGuessList()
           ></image>
         </navigator>
         <view class="meta">
-          <navigator url="/pages/login/login" hover-class="none" class="nickname">
-            未登录
-          </navigator>
+          <navigator url="/pages/login/login" hover-class="none" class="nickname"> 未登录 </navigator>
           <view class="extra">
             <text class="tips">点击登录账号</text>
           </view>
         </view>
       </view>
-      <navigator class="settings" url="/pagesMember/settings/settings" hover-class="none">
-        设置
-      </navigator>
+      <navigator class="settings" url="/pagesMember/settings/settings" hover-class="none"> 设置 </navigator>
     </view>
     <!-- 我的订单 -->
     <view class="orders">
@@ -97,7 +93,7 @@ page {
 }
 .viewport {
   height: 100%;
-  background-image: url('https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/center_bg.png');
+  background-image: url("https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/center_bg.png");
   background-repeat: no-repeat;
   background-size: 100% auto;
 }

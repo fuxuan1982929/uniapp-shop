@@ -1,39 +1,39 @@
 <script setup lang="ts">
-import { getCategoryTopAPI } from '@/services/category'
-import { getHomeBannerAPI } from '@/services/home'
-import type { CategoryTopItem } from '@/types/category'
-import type { BannerItem } from '@/types/home'
-import { onLoad } from '@dcloudio/uni-app'
-import { computed, ref } from 'vue'
-import PageSkeleton from './components/PageSkeleton.vue'
+import { getCategoryTopAPI } from "@/services/category";
+import { getHomeBannerAPI } from "@/services/home";
+import type { CategoryTopItem } from "@/types/category";
+import type { BannerItem } from "@/types/home";
+import { onLoad } from "@dcloudio/uni-app";
+import { computed, ref } from "vue";
+import PageSkeleton from "./components/PageSkeleton.vue";
 
 // 获取轮播图数据
-const bannerList = ref<BannerItem[]>([])
+const bannerList = ref<BannerItem[]>([]);
 const getBannerData = async () => {
-  const res = await getHomeBannerAPI(2)
-  bannerList.value = res.result
-}
+  const res = await getHomeBannerAPI(2);
+  bannerList.value = res.result;
+};
 
 // 获取分类列表数据
-const categoryList = ref<CategoryTopItem[]>([])
-const activeIndex = ref(0)
+const categoryList = ref<CategoryTopItem[]>([]);
+const activeIndex = ref(0);
 const getCategoryTopData = async () => {
-  const res = await getCategoryTopAPI()
-  categoryList.value = res.result
-}
+  const res = await getCategoryTopAPI();
+  categoryList.value = res.result;
+};
 
 // 是否数据加载完毕
-const isFinish = ref(false)
+const isFinish = ref(false);
 // 页面加载
 onLoad(async () => {
-  await Promise.all([getBannerData(), getCategoryTopData()])
-  isFinish.value = true
-})
+  await Promise.all([getBannerData(), getCategoryTopData()]);
+  isFinish.value = true;
+});
 
 // 提取当前二级分类数据
 const subCategoryList = computed(() => {
-  return categoryList.value[activeIndex.value]?.children || []
-})
+  return categoryList.value[activeIndex.value]?.children || [];
+});
 </script>
 
 <template>
@@ -94,5 +94,5 @@ const subCategoryList = computed(() => {
 </template>
 
 <style lang="scss">
-@import './styles/category.scss';
+@import "./styles/category.scss";
 </style>
