@@ -48,9 +48,9 @@
             <image class="cover sk-image"></image>
             <view class="meta">
               <view class="name ellipsis sk-transparent sk-text-14-2857-130 sk-text">源自澳洲进口羊毛，儿童奢暖羊毛被升级款</view>
-              <view class="type sk-transparent sk-text-22-2222-110 sk-text"
-                >春秋款， 100%羊毛款：150x200cm，适合1.2米/1.35米床</view
-              >
+              <view class="type sk-transparent sk-text-22-2222-110 sk-text">
+                春秋款， 100%羊毛款：150x200cm，适合1.2米/1.35米床
+              </view>
               <view class="price">
                 <view class="actual">
                   <text class="symbol sk-transparent sk-opacity">¥</text>

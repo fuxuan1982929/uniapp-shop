@@ -75,9 +75,9 @@
             </view>
           </view>
         </scroll-view>
-        <view class="close" @click="close('close')" v-if="showClose != false"
-          ><image class="close-item" :src="closeImage"></image
-        ></view>
+        <view class="close" @click="close('close')" v-if="showClose != false">
+          <image class="close-item" :src="closeImage" />
+        </view>
       </view>
 
       <view class="btn-wrapper" v-if="outFoStock || mode == 4">
