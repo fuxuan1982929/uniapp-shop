@@ -1153,7 +1153,6 @@ export default {
     background-color: rgb(0 0 0 / 30%);
   }
   .layer {
-
     // min-height: 40vh;
     // max-height: 1014rpx;
     position: fixed;
