@@ -36,7 +36,7 @@ const onLogout = () => {
     <!-- #endif -->
     <!-- 列表3 -->
     <view class="list">
-      <button hover-class="none" class="item arrow">关于小兔鲜儿</button>
+      <button hover-class="none" class="item arrow">关于我们</button>
     </view>
     <!-- 操作按钮 -->
     <view class="action" v-if="memberStore.profile">

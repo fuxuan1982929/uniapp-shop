@@ -58,7 +58,7 @@ const onSubmit = async () => {
 <template>
   <view class="viewport">
     <view class="logo">
-      <image src="https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/logo_icon.png"></image>
+      <image src="https://apitest.ukynda.com/images/appresource/logo.jpg"></image>
     </view>
     <view class="login">
       <!-- 网页端表单登录 -->
@@ -86,7 +86,7 @@ const onSubmit = async () => {
           </button>
         </view>
       </view>
-      <view class="tips">登录/注册即视为你同意《服务条款》和《小兔鲜儿隐私协议》</view>
+      <view class="tips">登录/注册即视为你同意《服务条款》和《隐私协议》</view>
     </view>
   </view>
 </template>
@@ -105,10 +105,11 @@ page {
   flex: 1;
   text-align: center;
   image {
-    width: 220rpx;
-    height: 220rpx;
-    margin-top: 15vh;
+    width: 80%;
+    height: 80%;
+    border-radius: 20rpx;
   }
+  margin-top: 10vh;
 }
 .login {
   display: flex;
@@ -139,10 +140,10 @@ page {
     }
   }
   .phone {
-    background-color: #28bb9c;
+    background-color: #e00180;
   }
   .wechat {
-    background-color: #06c05f;
+    background-color: #e00180;
   }
   .extra {
     flex: 1;

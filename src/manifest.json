@@ -1,5 +1,5 @@
 {
-  "name": "小兔鲜儿",
+  "name": "瑞麒小程序",
   "appid": "__UNI__265C604",
   "description": "",
   "versionName": "1.0.0",
@@ -97,9 +97,9 @@
   },
   /* 小程序特有相关 */
   "mp-weixin": {
-    "appid": "wx26729f20b9efae3a",
+    "appid": "wxfbe30e791ec5e18e",
     "setting": {
-      "urlCheck": true
+      "urlCheck": false
     },
     "usingComponents": true
   },

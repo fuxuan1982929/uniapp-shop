@@ -20,6 +20,8 @@ export type CategoryItem = {
   id: string;
   /** 分类名称 */
   name: string;
+  /** 跳转链接*/
+  hrefUrl: string;
 };
 
 /** 首页-热门推荐数据类型 */

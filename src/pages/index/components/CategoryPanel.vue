@@ -2,14 +2,16 @@
 import type { CategoryItem } from "@/types/home";
 
 // 定义 props 接收数据
-defineProps<{
+const props = defineProps<{
   list: CategoryItem[];
 }>();
+
+//console.log(props.list);
 </script>
 
 <template>
   <view class="category">
-    <navigator class="category-item" hover-class="none" url="/pages/hot/hot?type=1" v-for="item in list" :key="item.id">
+    <navigator class="category-item" hover-class="none" :url="item.hrefUrl" v-for="item in list" :key="item.id">
       <image class="icon" :src="item.icon"></image>
       <text class="text">{{ item.name }}</text>
     </navigator>

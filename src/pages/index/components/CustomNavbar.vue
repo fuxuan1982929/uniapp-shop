@@ -1,13 +1,15 @@
 <script setup lang="ts">
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync();
+
+console.log("safeAreaInsets!.top:" + safeAreaInsets!.top);
 </script>
 
 <template>
-  <view class="navbar" :style="{ paddingTop: safeAreaInsets!.top + 10 + 'px' }">
+  <view class="navbar" :style="{ paddingTop: safeAreaInsets!.top + 40 + 'px' }">
     <!-- logo文字 -->
     <view class="logo">
-      <image class="logo-image" src="@/static/images/swiky_logo.png"></image>
+      <image class="logo-image" src="https://apitest.ukynda.com/images/appresource/swiky_logo.png"></image>
       <text class="logo-text">内部服务</text>
     </view>
     <!-- 搜索条 -->
@@ -25,7 +27,7 @@ const { safeAreaInsets } = uni.getSystemInfoSync();
   display: flex;
   flex-direction: column;
   padding-top: 20px;
-  background-image: url("@/static/images/swiky_bg.png");
+  background-image: url("https://apitest.ukynda.com/images/appresource/swiky_bg.png");
   background-size: cover;
   .logo {
     display: flex;

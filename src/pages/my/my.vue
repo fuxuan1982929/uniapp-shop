@@ -78,10 +78,6 @@ const { guessRef, onScrolltolower } = useGuessList();
         <!-- #endif -->
       </view>
     </view>
-    <!-- 猜你喜欢 -->
-    <view class="guess">
-      <XtxGuess ref="guessRef" />
-    </view>
   </scroll-view>
 </template>
 
@@ -93,7 +89,7 @@ page {
 }
 .viewport {
   height: 100%;
-  background-image: url("https://pcapi-xiaotuxian-front-devtest.itheima.net/miniapp/images/center_bg.png");
+  background-image: url("https://apitest.ukynda.com/images/appresource/swiky_bg.png");
   background-repeat: no-repeat;
   background-size: 100% auto;
 }

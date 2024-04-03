@@ -108,7 +108,7 @@
 
 /* 原因：H5 端样式自动开启 scoped 隔离，导致骨架屏的基础样式被隔离 */
 @import "../styles/category.scss";
-@import "../styles/hot.scss";
+//@import "../styles/hot.scss";
 @import "@/components/styles/XtxSwiper.scss";
 
 /* #endif */

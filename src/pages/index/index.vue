@@ -5,7 +5,7 @@ import { onLoad } from "@dcloudio/uni-app";
 import { ref } from "vue";
 import CustomNavbar from "./components/CustomNavbar.vue";
 import CategoryPanel from "./components/CategoryPanel.vue";
-import HotPanel from "./components/HotPanel.vue";
+//import HotPanel from "./components/HotPanel.vue";
 import PageSkeleton from "./components/PageSkeleton.vue";
 import { useGuessList } from "@/composables";
 
@@ -13,14 +13,15 @@ import { useGuessList } from "@/composables";
 const bannerList = ref<BannerItem[]>([]);
 const getHomeBannerData = async () => {
   const res = await getHomeBannerAPI();
-  bannerList.value = res.result;
+  //bannerList.value = res.result; //for api
+  bannerList.value = res;
 };
 
-// 获取前台分类数据
+// 获取主菜单数据
 const categoryList = ref<CategoryItem[]>([]);
 const getHomeCategoryData = async () => {
   const res = await getHomeCategoryAPI();
-  //categoryList.value = res.result
+  //categoryList.value = res.result; //for api
   categoryList.value = res;
 };
 
@@ -82,7 +83,7 @@ const onRefresherrefresh = async () => {
         <!-- 分类面板 -->
         <CategoryPanel :list="categoryList" />
         <!-- 热门推荐 -->
-        <HotPanel :list="hotList" />
+        <!-- <HotPanel :list="hotList" /> -->
         <!-- 猜你喜欢 -->
         <!-- <XtxGuess ref="guessRef" /> -->
       </template>
