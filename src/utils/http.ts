@@ -10,9 +10,22 @@
  *   4. 添加 token 请求头标识
  */
 
+import { ResultEnum } from "@/enums/httpEnum";
 import { useMemberStore } from "@/stores";
 
-const baseURL = "https://pcapi-xiaotuxian-front-devtest.itheima.net";
+const config = {
+  // 默认地址请求地址，可在 .env.** 文件中修改
+  baseURL: import.meta.env.VITE_API_URL as string,
+  // 设置超时时间
+  timeout: ResultEnum.TIMEOUT as number,
+  // 跨域时候允许携带凭证
+  withCredentials: true
+};
+
+//console.log("config.baseURL:" + config.baseURL);
+
+//const baseURL = "https://pcapi-xiaotuxian-front-devtest.itheima.net";
+const baseURL = config.baseURL;
 
 // 添加拦截器
 const httpInterceptor = {
@@ -31,7 +44,7 @@ const httpInterceptor = {
     };
     // 4. 添加 token 请求头标识
     const memberStore = useMemberStore();
-    const token = memberStore.profile?.token;
+    const token = memberStore.profile?.Token;
     if (token) {
       options.header.Authorization = token;
     }
@@ -54,10 +67,12 @@ uni.addInterceptor("uploadFile", httpInterceptor);
  *    3.3 网络错误 -> 提示用户换网络
  */
 type Data<T> = {
-  code: string;
+  success: boolean;
+  code: number;
   msg: string;
-  result: T;
+  data: T;
 };
+
 // 2.2 添加类型，支持泛型
 export const http = <T>(options: UniApp.RequestOptions) => {
   // 1. 返回 Promise 对象
@@ -68,8 +83,17 @@ export const http = <T>(options: UniApp.RequestOptions) => {
       success(res) {
         // 状态码 2xx， axios 就是这样设计的
         if (res.statusCode >= 200 && res.statusCode < 300) {
-          // 2.1 提取核心数据 res.data
-          resolve(res.data as Data<T>);
+          const d = res.data as Data<T>;
+          //token expired
+          if (d.code == ResultEnum.OVERDUE) {
+            const memberStore = useMemberStore();
+            memberStore.clearProfile();
+            uni.navigateTo({ url: "/pages/login/login" });
+            reject(res);
+          } else {
+            // 2.1 提取核心数据 res.data
+            resolve(d);
+          }
         } else if (res.statusCode === 401) {
           // 401错误  -> 清理用户信息，跳转到登录页
           const memberStore = useMemberStore();

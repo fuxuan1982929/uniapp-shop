@@ -60,39 +60,40 @@ const tabChange = (e: { detail: { current: number } }) => {
 </script>
 
 <template>
-  <view style="text-align: center; padding: 5px; margin-top: 5px; font-size: 22px; font-weight: bold"> 今日出货 1222.33 </view>
-  <view>
-    <!-- 顶部导航栏 -->
-    <view class="horizonal-tab">
-      <scroll-view v-bind:scroll-x="true" scroll-with-animation class="scroll-tab">
-        <block v-for="(item, index) in data.tabBars" :key="index">
-          <view class="scroll-tab-item" :class="{ active: tabIndex == index }" @tap="toggleTab(index)">
-            <view>
-              <view style="background-color: #42b983; color: #fff; padding: 5px 20px">{{ item.name }}</view>
-              <view style="background-color: #ccc; color: #42b983; padding: 5px 20px">666.66</view>
+  <view class="viewport">
+    <view style="text-align: center; padding: 5px; margin-top: 5px; font-size: 22px; font-weight: bold"> 今日出货 1222.33 </view>
+    <view>
+      <!-- 顶部导航栏 -->
+      <view class="horizonal-tab">
+        <scroll-view v-bind:scroll-x="true" scroll-with-animation class="scroll-tab">
+          <block v-for="(item, index) in data.tabBars" :key="index">
+            <view class="scroll-tab-item" :class="{ active: tabIndex == index }" @tap="toggleTab(index)">
+              <view>
+                <view style="background-color: #42b983; color: #fff; padding: 5px 20px">{{ item.name }}</view>
+                <view style="background-color: #ccc; color: #42b983; padding: 5px 20px">666.66</view>
+              </view>
+              <view class="scroll-tab-line"></view>
             </view>
-            <view class="scroll-tab-line"></view>
-          </view>
-        </block>
-      </scroll-view>
-    </view>
-    <!-- 内容区 -->
-    <view class="uni-margin-wrap">
-      <!-- 滑块视图 -->
-      <swiper class="swiper" :current="tabIndex" @change="tabChange">
-        <swiper-item v-for="(content, index) in data.tabBars" :key="index">
-          <uni-section :title="content.name + '公费段销售分布'" type="line">
-            <SaleDistribute />
-          </uni-section>
-          <uni-section title="区域分布" type="line">
-            <RegionDistribute />
-          </uni-section>
-        </swiper-item>
-      </swiper>
+          </block>
+        </scroll-view>
+      </view>
+      <!-- 内容区 -->
+      <view class="uni-margin-wrap">
+        <!-- 滑块视图 -->
+        <swiper class="swiper" :current="tabIndex" @change="tabChange">
+          <swiper-item v-for="(content, index) in data.tabBars" :key="index">
+            <uni-section :title="content.name + '公费段销售分布'" type="line">
+              <SaleDistribute />
+            </uni-section>
+            <uni-section title="区域分布" type="line">
+              <RegionDistribute />
+            </uni-section>
+          </swiper-item>
+        </swiper>
+      </view>
     </view>
   </view>
 </template>
-
 <style lang="scss">
 .horizonal-tab .active {
   color: red;

@@ -2,6 +2,8 @@ import type { PageParams, PageResult } from "@/types/global";
 import type { BannerItem, CategoryItem, GuessItem, HotItem } from "@/types/home";
 import { http } from "@/utils/http";
 
+const imageBaseUrl = import.meta.env.VITE_IMG_BASE_URL;
+
 /**
  * 首页-广告区域-小程序
  * @param distributionSite 广告区域展示位置（投放位置 投放位置，1为首页，2为分类商品页） 默认是1

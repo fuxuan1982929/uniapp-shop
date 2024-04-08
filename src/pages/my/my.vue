@@ -3,6 +3,7 @@ import { useGuessList } from "@/composables";
 import { useMemberStore } from "@/stores";
 // 获取屏幕边界到安全区域距离
 const { safeAreaInsets } = uni.getSystemInfoSync();
+const imageBaseUrl = import.meta.env.VITE_IMG_BASE_URL;
 // 订单选项
 const orderTypes = [
   { type: "1", text: "待付款", icon: "icon-currency" },
@@ -12,7 +13,7 @@ const orderTypes = [
 ];
 // 获取会员信息
 const memberStore = useMemberStore();
-
+console.log("memberStore.profile:" + memberStore.profile);
 const { guessRef, onScrolltolower } = useGuessList();
 </script>
 
@@ -23,11 +24,11 @@ const { guessRef, onScrolltolower } = useGuessList();
       <!-- 情况1：已登录 -->
       <view class="overview" v-if="memberStore.profile">
         <navigator url="/pagesMember/profile/profile" hover-class="none">
-          <image class="avatar" :src="memberStore.profile.avatar" mode="aspectFill"></image>
+          <image class="avatar" :src="`${imageBaseUrl}/my.png`" mode="aspectFill"></image>
         </navigator>
         <view class="meta">
           <view class="nickname">
-            {{ memberStore.profile.nickname || memberStore.profile.account }}
+            {{ memberStore.profile.Name || memberStore.profile.Number }}
           </view>
           <navigator class="extra" url="/pagesMember/profile/profile" hover-class="none">
             <text class="update">更新头像昵称</text>
@@ -37,11 +38,7 @@ const { guessRef, onScrolltolower } = useGuessList();
       <!-- 情况2：未登录 -->
       <view class="overview" v-else>
         <navigator url="/pages/login/login" hover-class="none">
-          <image
-            class="avatar gray"
-            mode="aspectFill"
-            src="https://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-04-06/db628d42-88a7-46e7-abb8-659448c33081.png"
-          ></image>
+          <image class="avatar gray" mode="aspectFill" :src="`${imageBaseUrl}/my.png`"></image>
         </navigator>
         <view class="meta">
           <navigator url="/pages/login/login" hover-class="none" class="nickname"> 未登录 </navigator>
@@ -53,7 +50,7 @@ const { guessRef, onScrolltolower } = useGuessList();
       <navigator class="settings" url="/pagesMember/settings/settings" hover-class="none"> 设置 </navigator>
     </view>
     <!-- 我的订单 -->
-    <view class="orders">
+    <view class="orders" v-if="true">
       <view class="title">
         我的订单
         <navigator class="navigator" url="/pagesOrder/list/list?type=0" hover-class="none">
@@ -91,7 +88,7 @@ page {
   height: 100%;
   background-image: url("https://apitest.ukynda.com/images/appresource/swiky_bg.png");
   background-repeat: no-repeat;
-  background-size: 100% auto;
+  //background-size: 100% auto;
 }
 
 /* 用户信息 */

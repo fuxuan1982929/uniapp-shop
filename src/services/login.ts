@@ -33,8 +33,8 @@ export const postLoginWxMinSimpleAPI = (phoneNumber: string) => {
 };
 
 type LoginParams = {
-  account: string;
-  password: string;
+  Number: string;
+  PassWord: string;
 };
 /**
  * 传统登录-用户名+密码
@@ -43,7 +43,7 @@ type LoginParams = {
 export const postLoginAPI = (data: LoginParams) => {
   return http<LoginResult>({
     method: "POST",
-    url: "/login",
+    url: "/login/StdLogin",
     data
   });
 };

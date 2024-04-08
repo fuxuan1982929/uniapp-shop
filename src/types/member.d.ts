@@ -1,21 +1,29 @@
 /** 通用的用户信息 */
 type BaseProfile = {
   /** 用户ID */
-  id: number;
+  Id: number;
+  /** 部门  */
+  DepartId: number;
+  /** ERP */
+  BaseType: number;
   /** 头像  */
-  avatar: string;
+  //avatar: string;
   /** 账户名  */
-  account: string;
+  Number: string;
   /** 昵称 */
-  nickname?: string;
+  Name?: string;
 };
 
 /** 小程序登录 登录用户信息 */
 export type LoginResult = BaseProfile & {
   /** 手机号 */
-  mobile: string;
+  //mobile: string;
   /** 登录凭证 */
-  token: string;
+  Token: string;
+  /**成功标记 */
+  Success: boolean;
+  /**错误信息 */
+  ErrorMsg: string;
 };
 
 /** 个人信息 用户详情信息 */
