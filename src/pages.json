@@ -52,14 +52,14 @@
       {
         "text": "首页",
         "pagePath": "pages/index/index",
-        "iconPath": "static/tabs/home_default.png",
-        "selectedIconPath": "static/tabs/home_selected.png"
+        "iconPath": "static/tabs/swiky_home_default.png",
+        "selectedIconPath": "static/tabs/swiky_home_selected.png"
       },
       {
         "text": "我的",
         "pagePath": "pages/my/my",
-        "iconPath": "static/tabs/user_default.png",
-        "selectedIconPath": "static/tabs/user_selected.png"
+        "iconPath": "static/tabs/swiky_user_default.png",
+        "selectedIconPath": "static/tabs/swiky_user_selected.png"
       }
     ]
   },

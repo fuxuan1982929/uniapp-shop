@@ -50,7 +50,7 @@ const { guessRef, onScrolltolower } = useGuessList();
       <navigator class="settings" url="/pagesMember/settings/settings" hover-class="none"> 设置 </navigator>
     </view>
     <!-- 我的订单 -->
-    <view class="orders" v-if="true">
+    <view class="orders" v-if="false">
       <view class="title">
         我的订单
         <navigator class="navigator" url="/pagesOrder/list/list?type=0" hover-class="none">
