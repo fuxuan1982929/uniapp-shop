@@ -16,12 +16,20 @@ export type BannerItem = {
 export type CategoryItem = {
   /** 图标路径 */
   icon: string;
-  /** id */
-  id: string;
+  /** appId */
+  appId: string;
   /** 分类名称 */
   name: string;
+  /** 在哪个目标上发生跳转，默认当前小程序;默认值self */
+  target: string;
   /** 跳转链接*/
-  hrefUrl: string;
+  path: string;
+  /** 跳转方式;值为navigate对应wx.navigateToMiniProgram的功能 */
+  openType: string;
+  /** 当target="miniProgram"时有效，需要传递给目标小程序的数据 */
+  extraData: string;
+  /** version:当target="miniProgram"时有效，要打开的小程序版本;develop 开发版、 trial 体验版、 release 正式版。 */
+  version: string;
 };
 
 /** 首页-热门推荐数据类型 */

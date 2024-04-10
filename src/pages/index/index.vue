@@ -18,12 +18,12 @@ const getHomeBannerData = async () => {
 };
 
 // 获取主菜单数据
-const categoryList = ref<CategoryItem[]>([]);
-const getHomeCategoryData = async () => {
-  const res = await getHomeCategoryAPI();
-  //categoryList.value = res.result; //for api
-  categoryList.value = res;
-};
+//const categoryList = ref<CategoryItem[]>([]);
+// const getHomeCategoryData = async () => {
+//   const res = await getHomeCategoryAPI();
+//   //categoryList.value = res.result; //for api
+//   categoryList.value = res;
+// };
 
 // 获取热门推荐数据
 const hotList = ref<HotItem[]>([]);
@@ -39,7 +39,7 @@ const isLoading = ref(false);
 onLoad(async () => {
   isLoading.value = true;
   //await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHomeHotData()]);
-  await Promise.all([getHomeBannerData(), getHomeCategoryData()]);
+  await Promise.all([getHomeBannerData()]);
   isLoading.value = false;
 });
 
@@ -57,7 +57,7 @@ const onRefresherrefresh = async () => {
   // await getHomeHotData()
   // 重置猜你喜欢组件数据
   guessRef.value?.resetData();
-  await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHomeHotData(), guessRef.value?.getMore()]);
+  await Promise.all([getHomeBannerData(), guessRef.value?.getMore()]);
   // 关闭动画
   isTriggered.value = false;
 };
@@ -82,7 +82,7 @@ const onRefresherrefresh = async () => {
         <!-- 自定义轮播图 -->
         <XtxSwiper :list="bannerList" />
         <!-- 分类面板 -->
-        <CategoryPanel :list="categoryList" />
+        <CategoryPanel />
         <!-- 热门推荐 -->
         <!-- <HotPanel :list="hotList" /> -->
         <!-- 猜你喜欢 -->

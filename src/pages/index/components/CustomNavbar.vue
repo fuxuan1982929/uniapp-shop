@@ -13,8 +13,8 @@ const imageBaseUrl = import.meta.env.VITE_IMG_BASE_URL;
   >
     <!-- logo文字 -->
     <view class="logo">
-      <image class="logo-image" :src="`${imageBaseUrl}/swiky_logo.png`"></image>
-      <text class="logo-text">内部服务</text>
+      <image class="logo-image" :src="`${imageBaseUrl}/swiky_logo_head.png`"></image>
+      <text class="logo-text">全球品牌珠宝一站式服务商</text>
     </view>
     <!-- 搜索条 -->
     <view class="search">
@@ -38,8 +38,8 @@ const imageBaseUrl = import.meta.env.VITE_IMG_BASE_URL;
     height: 64rpx;
     padding-left: 30rpx;
     .logo-image {
-      width: 166rpx;
-      height: 39rpx;
+      width: 100px;
+      height: 100%;
     }
     .logo-text {
       flex: 1;

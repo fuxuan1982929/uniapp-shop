@@ -17,9 +17,9 @@ onLoad(async () => {
 
 // 获取用户手机号码
 const onGetphonenumber: UniHelper.ButtonOnGetphonenumber = async ev => {
-  // const { encryptedData, iv } = ev.detail;
-  // const res = await postLoginWxMinAPI({ code, encryptedData, iv });
-  // loginSuccess(res.result);
+  const { encryptedData, iv } = ev.detail;
+  const res = await postLoginWxMinAPI({ code, encryptedData, iv });
+  loginSuccess(res.data);
 };
 
 const loginSuccess = (profile: LoginResult) => {
@@ -50,7 +50,7 @@ const onSubmit = async () => {
 <template>
   <view class="viewport">
     <view class="logo">
-      <image :src="imageBaseUrl + 'logo.jpg'"></image>
+      <image :src="`${imageBaseUrl}/swiky_logo_head.png`"></image>
     </view>
     <view v-if="env" class="env">**测试环境**</view>
     <view class="login">

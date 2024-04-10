@@ -49,22 +49,34 @@ export const getHomeBannerAPI = (distributionSite = 1) => {
 export const getHomeCategoryAPI = () => {
   const data: CategoryItem[] = [
     {
-      id: "DailyReport",
+      appId: "DailyReport",
       icon: "https://apitest.ukynda.com/images/appresource/daily-report-s.png",
       name: "运营日报",
-      hrefUrl: "/pagesDailyReport/daily-report/daily-report"
+      target: "",
+      path: "/pagesDailyReport/daily-report/daily-report",
+      openType: "",
+      extraData: "",
+      version: ""
     },
     {
-      id: "Pickup",
+      appId: "Pickup",
       icon: "https://apitest.ukynda.com/images/appresource/brand.png",
       name: "外勤接送",
-      hrefUrl: ""
+      target: "",
+      path: "",
+      openType: "navigate",
+      extraData: "",
+      version: ""
     },
     {
-      id: "MicroTask",
-      icon: "http://yjy-xiaotuxian-dev.oss-cn-beijing.aliyuncs.com/picture/2021-05-06/201516e3-25d0-48f5-bcee-7f0cafb14176.png?quality=95&imageView",
+      appId: "wxfbe30e791ec5e18e",
+      icon: "https://apitest.ukynda.com/images/appresource/c3.png",
       name: "微任务",
-      hrefUrl: ""
+      target: "miniProgram",
+      path: "pages/index/index",
+      openType: "navigate",
+      extraData: "",
+      version: "trial"
     }
   ];
   return data;
